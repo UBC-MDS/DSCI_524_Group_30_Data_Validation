@@ -1,5 +1,18 @@
 # Welcome to DSCI_524_Group_30_Data_Validation
 
+## Getting Started
+1. To get started, clone the repository to your local device. 
+
+2. Create the Conda environment from the lock file
+```
+conda-lock install -n project-env conda-lock.yml
+```
+3. Activate the environment
+```
+conda activate project-env
+```
+You should now see (project-env) in your terminal prompt.
+
 |        |        |
 |--------|--------|
 | Package | [![Latest PyPI Version](https://img.shields.io/pypi/v/dsci_524_group_30_data_validation.svg)](https://pypi.org/project/dsci_524_group_30_data_validation/) [![Supported Python Versions](https://img.shields.io/pypi/pyversions/dsci_524_group_30_data_validation.svg)](https://pypi.org/project/dsci_524_group_30_data_validation/)  |
