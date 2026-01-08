@@ -1,0 +1,12 @@
+name: dsci-524-proj-env
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - conda-lock
+  - hatch
+  - copier
+  - pandas
+  - pip
+  - altair
+prefix: C:\Users\jjyor\miniforge3\envs\dsci-524-proj-env
