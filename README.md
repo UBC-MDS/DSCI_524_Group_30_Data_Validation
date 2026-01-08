@@ -1,5 +1,7 @@
 # Welcome to DSCI_524_Group_30_Data_Validation
 
+This package looks to re-imagine some of the functions of Panderas in a more user-friendly way. 
+
 ## Getting Started
 1. To get started, clone the repository to your local device. 
 
@@ -13,17 +15,7 @@ conda activate project-env
 ```
 You should now see (project-env) in your terminal prompt.
 
-|        |        |
-|--------|--------|
-| Package | [![Latest PyPI Version](https://img.shields.io/pypi/v/dsci_524_group_30_data_validation.svg)](https://pypi.org/project/dsci_524_group_30_data_validation/) [![Supported Python Versions](https://img.shields.io/pypi/pyversions/dsci_524_group_30_data_validation.svg)](https://pypi.org/project/dsci_524_group_30_data_validation/)  |
-| Meta   | [![Code of Conduct](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md) |
-
-*TODO: the above badges that indicate python version and package version will only work if your package is on PyPI.
-If you don't plan to publish to PyPI, you can remove them.*
-
-DSCI_524_Group_30_Data_Validation is a project that (describe what it does here).
-
-## Get started
+## Installing the Package
 
 You can install this package into your preferred Python environment using pip:
 
@@ -40,7 +32,10 @@ To use dsci_524_group_30_data_validation in your code:
 >>> dsci_524_group_30_data_validation.hello_world()
 ```
 
+## Contributors
+Daniel Yorke, Cynthia Agata Limantono, Shrijaa, and Wendy Frankel
+
 ## Copyright
 
-- Copyright © 2026 Daniel, Cynthia, Wendy, Shrijaa.
+- Copyright © 2026 Daniel Yorke, Cynthia Agata Limantono, Shrijaa, and Wendy Frankel
 - Free software distributed under the [MIT License](./LICENSE).
