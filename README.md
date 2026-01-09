@@ -33,9 +33,9 @@ To use dsci_524_group_30_data_validation in your code:
 ```
 
 ## Contributors
-Daniel Yorke, Cynthia Agata Limantono, Shrijaa, and Wendy Frankel
+Daniel Yorke, Cynthia Agata Limantono, Shrijaa Venkatasubramanian Subashini, and Wendy Frankel
 
 ## Copyright
 
-- Copyright © 2026 Daniel Yorke, Cynthia Agata Limantono, Shrijaa, and Wendy Frankel
+- Copyright © 2026 Daniel Yorke, Cynthia Agata Limantono, Shrijaa Venkatasubramanian Subashini, and Wendy Frankel
 - Free software distributed under the [MIT License](./LICENSE).
