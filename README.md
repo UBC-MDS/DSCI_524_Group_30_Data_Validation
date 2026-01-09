@@ -1,6 +1,6 @@
 # Welcome to DSCI_524_Group_30_Data_Validation
 
-This package looks to re-imagine some of the functions of Panderas in a more user-friendly way. 
+This package looks to re-imagine some of the functions of [Pandera](https://pandera.readthedocs.io/en/stable/) in a more user-friendly way. 
 
 ## Getting Started
 1. To get started, clone the repository to your local device. 
