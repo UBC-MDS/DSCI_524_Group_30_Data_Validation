@@ -12,7 +12,7 @@ informative, and concise output from running each function, designed to help to 
 3. Values Outlier Function: Validates that a DataFrame column contains an acceptable proportion of values outside a user-defined range.
 4. Categorical Column Function: Validate categorical column properties in a pandas DataFrame.
 
-The project looks to re-imagine some of the functions of [Pandera](https://pandera.readthedocs.io/en/stable/) in a more user-friendly way.
+The project looks to re-imagine some of the functions of [Pandera](https://pandera.readthedocs.io/en/stable/) in a more user-friendly way. It aims mainly to improve output of the Panderas function, making it more informative and interpretable.
 
 ## Getting Started
 
@@ -24,7 +24,7 @@ The project looks to re-imagine some of the functions of [Pandera](https://pande
 conda-lock install -n project-env conda-lock.yml
 ```
 
-3. Activate the environment
+1. Activate the environment
 
 ```
 conda activate project-env
