@@ -58,8 +58,6 @@ representative at an online or offline event. This includes interactions on GitH
 
 ## Enforcement
 
-[//]: # (TODO: You need to choose whom and how to contact them.)
-
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
 reported to the project maintainers via the contact details listed in the repository.
 All complaints will be reviewed and investigated promptly and fairly.
