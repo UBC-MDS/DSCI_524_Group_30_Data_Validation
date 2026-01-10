@@ -59,6 +59,6 @@ def outliers_validate(
     ...     upper_bound=65,
     ...     threshold=0.2,
     ... )
-    The proportion of outliers is within the acceptable threshold. Check complete!
+    "The proportion of outliers is within the acceptable threshold. Check complete!"
     """
     pass
