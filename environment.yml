@@ -9,4 +9,6 @@ dependencies:
   - pandas
   - pip
   - altair
+  - pytest
+  - faker
 prefix: C:\Users\jjyor\miniforge3\envs\dsci-524-proj-env
