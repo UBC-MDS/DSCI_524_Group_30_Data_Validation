@@ -1,0 +1,3 @@
+import pandas as pd
+import pytest
+from dsci_524_group_30_data_validation.col_types_validate import col_types_validate

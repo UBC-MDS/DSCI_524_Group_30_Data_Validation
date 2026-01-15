@@ -1,4 +1,4 @@
-def col_types(
+def col_types_validate(
     dataframe: pd.DataFrame,
     *,
     numeric_cols: int = 0,
