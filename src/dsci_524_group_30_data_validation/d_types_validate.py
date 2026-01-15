@@ -8,16 +8,26 @@ def col_types(
     categorical_cols: int = 0,
     text_cols: int = 0,
     datetime_cols: int = 0,
+    column_schema: dict[str, str | type] | None = None,
     allow_extra_cols: bool = False,
 ):
     """
     Validates that a DataFrame contains the expected number of each
-    given logical column category.
+    logical column category and/or that specific columns match
+    expected data types.
 
-    This function performs validation checks to ensure that the given Pandas
-    dataframe contains the expected number of each logical column category.
-    Keyword arguments are required. Users can also choose to
-    allow extra columns, not specified within the function arguments.
+    This function performs two types of validation on a Pandas DataFrame:
+
+    1. **Count-based validation**: Ensures the DataFrame contains the
+    expected number of columns in each logical column category
+    (e.g., numeric, text, categorical).
+
+    2. **Column-specific validation**: Ensures that user-specified
+    column names exist in the DataFrame and match their expected
+    logical data types.
+
+    All column count arguments are keyword-only. Users may also choose
+    to allow extra, unspecified columns.
 
     Parameters
     ----------
