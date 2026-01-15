@@ -8,8 +8,8 @@ def col_types(
     categorical_cols: int = 0,
     text_cols: int = 0,
     datetime_cols: int = 0,
-    column_schema: dict[str, str | type] | None = None,
     allow_extra_cols: bool = False,
+    column_schema: dict[str, str | type] | None = None,
 ):
     """
     Validates that a DataFrame contains the expected number of each
@@ -55,36 +55,80 @@ def col_types(
     datetime_cols : int, default 0
         Number of datetime-like columns ('datetime64' or timezone-aware).
 
+    allow_extra_cols : bool, default False
+        Whether to allow columns that are not accounted for by the
+        specified validation rules. If False, unexpected columns
+        will be reported as validation failures.
+
+    column_schema : dict[str, str or type], optional
+        Mapping of column names to expected logical data types.
+        Each specified column must exist in the DataFrame and match
+        the expected type.
+
+    Supported logical types include:
+        - "numeric"
+        - "integer"
+        - "float"
+        - "boolean"
+        - "categorical"
+        - "text"
+        - "datetime"
+
     Returns
     -------
     str
-        Message which either confirms that all columns are present in the
-        expected amounts, or prints out column types which are unexpected,
-        in what numbers, and their titles (if there are column titles).
-
-        If allow_extra_cols = True, and there are unexpected columns,
-        function will print out the unexpected columns.
+        A validation message indicating whether all checks passed.
+        If validation fails, the message describes which columns
+        are missing, mismatched, or unexpected.
 
     Notes
     -------
-        Keyword arguments are required for all column type arguments.
-
-        Validation results are printed as a string.
+    - Keyword arguments are required for all column type arguments.
+    - Count-based and column-specific validation may be used together.
+    - If both validation modes are provided, *both must pass* for
+    validation to succeed.
 
     Examples
     --------
+    Count-based validation only:
+
     >>> import pandas as pd
     >>> df = pd.DataFrame({
-            "city": ["Vancouver", "Toronto", "Calgary", "Winnipeg"],
-            "name": ["John Smith", "Bron Crift", "Pylon Gift", "Akon Sarmist"]
-            "gender": ["M", "F", "F", "M"],
-            "age": [25, 32, 41, 29]
-        })
+    ...     "city": ["Vancouver", "Toronto", "Calgary", "Winnipeg"],
+    ...     "name": ["John Smith", "Bron Crift", "Pylon Gift", "Akon Sarmist"],
+    ...     "gender": ["M", "F", "F", "M"],
+    ...     "age": [25, 32, 41, 29]
+    ... })
     >>> col_types(
-            dataframe=df,
-            numeric_cols = 1,
-            categorical_cols = 2,
-            text_cols = 1,
-        )
-    All column categories are present in the expected numbers. Check complete!
+    ...     dataframe=df,
+    ...     integer_cols=1,
+    ...     text_cols=3
+    ... )
+    'All column categories are present in the expected numbers. Check complete!'
+
+
+    Column-specific validation using logical type strings:
+
+    >>> col_types(
+    ...     dataframe=df,
+    ...     column_schema={
+    ...         "age": "integer",
+    ...         "city": "text",
+    ...         "name": "text"
+    ...     }
+    ... )
+    'All specified columns match their expected types. Check complete!'
+
+    Combined count-based and column-specific validation:
+
+    >>> col_types(
+    ...     dataframe=df,
+    ...     integer_cols=1,
+    ...     text_cols=3,
+    ...     column_schema={
+    ...         "age": "integer"
+    ...     }
+    ... )
+    'All column categories and specified columns are valid. Check complete!'
+
     """
