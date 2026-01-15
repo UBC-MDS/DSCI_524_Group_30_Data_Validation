@@ -1,3 +1,5 @@
+import pandas as pd
+
 def categorical_validate(
     dataframe: pd.DataFrame,
     column: str,
