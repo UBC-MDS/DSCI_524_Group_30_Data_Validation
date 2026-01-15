@@ -30,8 +30,8 @@ def test_col_types_validate():
     assert "Check complete" in result
 
     # Schema validation failure (column exists but wrong type)
-    with pytest.raises(TypeError):
-        col_types_validate(
-            dataframe=df,
-            column_schema={"age": "text"},  # age is integer, should raise TypeError
-        )
+    result = col_types_validate(
+        dataframe=df, column_schema={"age": "text"}  # age is actually integer
+    )
+    assert isinstance(result, str)
+    assert "Column 'age' expected type 'text'" in result
