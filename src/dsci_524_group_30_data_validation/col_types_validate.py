@@ -136,8 +136,6 @@ def col_types_validate(
 
     """
 
-    import pandas as pd
-
     report = []
 
     schema_used = False
