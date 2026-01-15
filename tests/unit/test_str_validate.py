@@ -33,6 +33,7 @@ def test_column_not_exists(full_df):
         categorical_validate(full_df, column="fruit", num_cat=3)
 
 def test_num_cat_correct(full_df):   
+    """Test if the function reterns the correct number of categories"""
     result = categorical_validate(full_df, column="city", num_cat=3)
     assert result == "Checks completed!"
 

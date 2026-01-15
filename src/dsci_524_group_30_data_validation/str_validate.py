@@ -77,7 +77,28 @@ def categorical_validate(
     Expected and actual number of categories are equal
     All categories are in title case
     'Checks completed!'
-       """
+    """
+    # Validate dataframe is pd.Dataframe
+    if not isinstance(dataframe, pd.DataFrame):
+        raise TypeError("dataframe must be a pd.DataFrame")
+    
+    # Check if argument for column name is a string
+    if not isinstance(column, str):
+        raise TypeError("column name argument must be as a string")
+
+    # Check if column exists
+    if column not in dataframe.columns:
+        raise KeyError(f"Column '{column}' does not exist in dataframe.")
+        
+    # Check that column dtype is str or catagorical
+    col = dataframe[column]
+    dtype = col.dtype
+    if dtype.kind not in {"O", "U", "S"} and str(dtype) != "category":
+        raise TypeError(
+            f"Column '{column}' must contain string or categorical data, "
+            f"not {dtype}"
+        )
+    
     # Validate case parameter
     valid_cases = ["upper", "lower", "title", None]
     if case not in valid_cases:
@@ -89,28 +110,7 @@ def categorical_validate(
     # Validate num_cat parameter
     if num_cat <= 0:
         raise ValueError("num_cat must be > 0.")
-    
-    # Validate dataframe is pd.Dataframe
-    if not isinstance(dataframe, pd.DataFrame):
-        raise TypeError("dataframe must be a pd.DataFrame")
-    
-    # Check if argument for column = string
-    if not isinstance(column, str):
-        raise TypeError("column name argument must be as a string")
-    
-    # Check that column dtype is str or catagorical
-    col = dataframe[column]
-    dtype = col.dtype
-    if dtype.kind not in {"O", "U", "S"} and str(dtype) != "category":
-        raise TypeError(
-            f"Column '{column}' must contain string or categorical data, "
-            f"not {dtype}"
-        )
-
-    # Check if column exists
-    if column not in dataframe.columns:
-        raise KeyError(f"Column '{column}' does not exist in dataframe.")
-    
+ 
     # Select column and drop NAs
     col = dataframe[column].dropna().astype(str)
 
