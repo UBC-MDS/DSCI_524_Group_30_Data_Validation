@@ -91,6 +91,19 @@ def categorical_validate(
     if num_cat <= 0:
         raise ValueError("num_cat must be > 0.")
     
+    # Validate dataframe is pd.Dataframe
+    if not isinstance(dataframe, pd.DataFrame):
+        raise TypeError("dataframe must be a pd.DataFrame")
+    
+    # Check that column dtype is str or catagorical
+    col = dataframe[column]
+    dtype = col.dtype
+    if dtype.kind not in {"O", "U", "S"} and str(dtype) != "category":
+        raise TypeError(
+            f"Column '{column}' must contain string or categorical data, "
+            f"not {dtype}"
+        )
+
     # Check if column exists
     if column not in dataframe.columns:
         raise KeyError(f"Column '{column}' does not exist in dataframe.")

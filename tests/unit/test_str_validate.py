@@ -40,8 +40,8 @@ def test_invalid_dataframe_type():
     """Test that non-DataFrame input raises TypeError."""
     not_a_df = {"city": ["Vancouver", "Toronto"]}
     
-    with pytest.raises(TypeError, match="DataFrame"):
-        categorical_validate(not_a_df, column="city", num_cat=2)
+    with pytest.raises(TypeError, match="pd.DataFrame"):
+        categorical_validate(dataframe= not_a_df, column="city", num_cat=2)
 
 def test_invalid_column_type(full_df):
     """Test that non-string column name raises TypeError."""  
