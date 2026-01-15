@@ -78,7 +78,6 @@ def categorical_validate(
     All categories are in title case
     'Checks completed!'
        """
-    
     # Validate case parameter
     valid_cases = ["upper", "lower", "title", None]
     if case not in valid_cases:
@@ -94,6 +93,10 @@ def categorical_validate(
     # Validate dataframe is pd.Dataframe
     if not isinstance(dataframe, pd.DataFrame):
         raise TypeError("dataframe must be a pd.DataFrame")
+    
+    # Check if argument for column = string
+    if not isinstance(column, str):
+        raise TypeError("column name argument must be as a string")
     
     # Check that column dtype is str or catagorical
     col = dataframe[column]
