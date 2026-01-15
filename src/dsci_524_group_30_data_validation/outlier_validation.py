@@ -1,3 +1,6 @@
+import pandas as pd
+
+
 def outliers_validate(
     dataframe: pd.DataFrame,
     *,
@@ -14,6 +17,11 @@ def outliers_validate(
     of values in the specified column that fall outside the given lower
     and upper bounds does not exceed the specified threshold.
     Keyword arguments are required.
+
+    Outliers are defined as values strictly less than `lower_bound` or strictly
+    greater than `upper_bound`. Values equal to the bounds are not considered
+    outliers. Missing values (NaN) are ignored when calculating the outlier
+    proportion.
 
     Parameters
     ----------
@@ -38,6 +46,15 @@ def outliers_validate(
         Message which either confirms that the proportion of outliers is
         within the acceptable threshold, or reports that the threshold
         has been exceeded.
+
+    Raises
+    ------
+    TypeError
+        If `dataframe` is not a pandas DataFrame.
+    ValueError
+        If `col` is not in the DataFrame, if `lower_bound` is not less than
+        `upper_bound`, if `threshold` is not between 0 and 1, or if the column
+        contains no non-missing values.
 
     Notes
     -------
