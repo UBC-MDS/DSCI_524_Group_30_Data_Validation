@@ -1,3 +1,6 @@
+import pandas as pd
+
+
 def col_types_validate(
     dataframe: pd.DataFrame,
     *,
