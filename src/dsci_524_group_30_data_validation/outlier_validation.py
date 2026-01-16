@@ -14,7 +14,7 @@ def outliers_validate(
     of values outside a user-defined range.
 
     This function performs validation checks to ensure that the proportion
-    of values in the specified column that fall outside the given lower
+   of non-missing values in the specified column that fall outside the given lower
     and upper bounds does not exceed the specified threshold.
     Keyword arguments are required.
 
