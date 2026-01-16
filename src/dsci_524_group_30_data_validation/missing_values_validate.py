@@ -53,8 +53,8 @@ def missing_values_validate(df: pd.DataFrame, col: str, threshold: float | int) 
     if not isinstance(df, pd.DataFrame):
         raise TypeError("Input 1 must be a pandas Dataframe")
 
-    if not isinstance(col, (str, int)):
-        raise TypeError("Input 2 must be a string or integer")
+    if not isinstance(col, str):
+        raise TypeError("Input 2 must be a string")
     
     if not isinstance(threshold, (float, int)):
         raise TypeError("Input 3 must be numeric")
