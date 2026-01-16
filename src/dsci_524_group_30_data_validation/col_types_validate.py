@@ -135,6 +135,11 @@ def col_types_validate(
     'All column categories and specified columns are valid. Check complete!'
 
     """
+    if not isinstance(dataframe, pd.DataFrame):
+        raise TypeError("dataframe must be a pandas DataFrame")
+
+    if column_schema is not None and not isinstance(column_schema, dict):
+        raise TypeError("column_schema must be a dictionary if provided")
 
     report = []
 

@@ -139,3 +139,41 @@ def test_empty_dataframe():
 
     assert isinstance(result, str)
     assert "check complete" in result.lower()
+
+
+def test_count_based_validation_no_counts(sample_df):
+    """Count-based validation should pass if all counts are 0 (ignored)."""
+    result = col_types_validate(dataframe=sample_df)
+    assert "Check complete" in result
+
+
+def test_extra_columns_allowed(sample_df):
+    """Extra columns are allowed when allow_extra_cols=True."""
+    result = col_types_validate(
+        dataframe=sample_df, integer_cols=1, allow_extra_cols=True
+    )
+    assert isinstance(result, str)
+    assert "Check complete" in result
+
+
+def test_extra_columns_disallowed(sample_df):
+    """Extra columns are reported when allow_extra_cols=False."""
+    result = col_types_validate(
+        dataframe=sample_df, integer_cols=1, text_cols=1, allow_extra_cols=False
+    )
+    assert isinstance(result, str)
+    assert "expected" in result.lower() and "'text'" in result.lower()
+
+
+def test_invalid_dataframe_type():
+    """Function should raise TypeError if input is not a DataFrame."""
+    import numpy as np
+
+    with pytest.raises(TypeError):
+        col_types_validate(dataframe=np.array([[1, 2], [3, 4]]))
+
+
+def test_invalid_column_schema_type(sample_df):
+    """Function should raise TypeError if column_schema is not a dict."""
+    with pytest.raises(TypeError):
+        col_types_validate(dataframe=sample_df, column_schema=["age", "text"])
