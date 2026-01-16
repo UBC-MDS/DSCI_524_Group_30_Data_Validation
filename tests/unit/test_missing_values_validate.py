@@ -66,11 +66,11 @@ def test_missing_values_validate_invalid_threshold(sample_dataframe):
         ({"name": ["Alex"]}, "name", 0.05, "Input 1 must be a pandas Dataframe"), # invalid input 1 not pd Dataframe
         (None, 1, 0.2, "Input 1 must be a pandas Dataframe"), # invalid input 1 empty DataFrame
         (pd.DataFrame({"name": ["Alex", None, None, "Austin", None]}), 
-         ["1", "name"], 0.1, "Input 2 must be a string or integer"), # invalid input 2 list
+         ["1", "name"], 0.1, "Input 2 must be a string"), # invalid input 2 list
         (pd.DataFrame({"name": ["Alex", None, None, "Austin", None]}), 
-         None, 0.1, "Input 2 must be a string or integer"), # invalid input 2 None
+         None, 0.1, "Input 2 must be a string"), # invalid input 2 None
         (pd.DataFrame({"name": ["Alex", None, None, "Austin", None]}), 
-         0.2, 0.12, "Input 2 must be a string or integer"), # invalid input 2 float 
+         0.2, 0.12, "Input 2 must be a string"), # invalid input 2 float 
         (pd.DataFrame({"age": [21, 43, 23, None, 38]}), 
          "age", "0.20", "Input 3 must be numeric"), #invalid input 3 string
         (pd.DataFrame({"age": [21, 43, 23, None, 38]}), 

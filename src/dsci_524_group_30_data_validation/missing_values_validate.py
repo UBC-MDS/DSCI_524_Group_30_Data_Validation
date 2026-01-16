@@ -52,6 +52,9 @@ def missing_values_validate(df: pd.DataFrame, col: str, threshold: float | int) 
 
     if not isinstance(df, pd.DataFrame):
         raise TypeError("Input 1 must be a pandas Dataframe")
+    
+    if df.empty:
+        raise ValueError("Dataframe cannot be empty")
 
     if not isinstance(col, str):
         raise TypeError("Input 2 must be a string")
@@ -65,8 +68,6 @@ def missing_values_validate(df: pd.DataFrame, col: str, threshold: float | int) 
     if threshold > 1:
         raise ValueError("Threshold is invalid: larger than 1")
     
-    if df.empty:
-        raise ValueError("Dataframe cannot be empty")
     
     try:
         na_frac = df[col].isna().mean()
