@@ -1,4 +1,4 @@
-def missing_values_validate(df: pd.DataFrame, col: str | int, threshold: float) -> bool:
+def missing_values_validate(df: pd.DataFrame, col: str | int, threshold: float | int) -> bool:
     """
     Validate the amount of missing values in a pandas DataFrame.
 
@@ -11,10 +11,10 @@ def missing_values_validate(df: pd.DataFrame, col: str | int, threshold: float) 
         the pandas DataFrame containing missing values.
     col : str or int
         the column name (str) or index (int) containing missing values to validate.
-    threshold : float
+    threshold : float or int
         the decimal threshold of missing values that is acceptable to check.
-        For instance, 0.20 for threshold means only 20% or lower of the 
-        observations are allowed to be missing.
+        Must be between 0 and 1 (inclusive). For instance, 0.20 for threshold 
+        means only 20% or lower of the observations are allowed to be missing. 
 
     Returns
     -------
@@ -26,12 +26,12 @@ def missing_values_validate(df: pd.DataFrame, col: str | int, threshold: float) 
     ------
     TypeError
         If df is None or not a pandas DataFrame or
-        if threshold is not numeric (float) or
+        if threshold is not numeric (float or int) or
         if col is not a string or an integer.
     KeyError
         If col does not exist in the dataframe.
     ValueError
-        If threshold is not between 0.0 and 1.0.
+        If threshold is not between 0.0 and 1.0 (inclusive) 
 
 
     Examples
