@@ -115,3 +115,15 @@ def test_outliers_validate_invalid_bounds_equal_raises():
             upper_bound=5,
             threshold=0.2,
         )
+def test_outliers_validate_non_dataframe_raises():
+    """
+    Test that a TypeError is raised when the input is not a pandas DataFrame.
+    """
+    with pytest.raises(TypeError, match="dataframe must be a pandas DataFrame"):
+        outliers_validate(
+            dataframe=[1, 2, 3],
+            col="x",
+            lower_bound=0,
+            upper_bound=10,
+            threshold=0.2,
+        )
