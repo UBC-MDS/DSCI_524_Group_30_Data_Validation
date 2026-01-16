@@ -1,6 +1,6 @@
 import pandas as pd
 
-def missing_values_validate(df: pd.DataFrame, col: str | int, threshold: float | int) -> bool:
+def missing_values_validate(df: pd.DataFrame, col: str, threshold: float | int) -> bool:
     """
     Validate the amount of missing values in a pandas DataFrame.
 
@@ -11,8 +11,8 @@ def missing_values_validate(df: pd.DataFrame, col: str | int, threshold: float |
     ----------
     df : pd.DataFrame
         the pandas DataFrame containing missing values.
-    col : str or int
-        the column name (str) or index (int) containing missing values to validate.
+    col : str
+        the column name (str) containing missing values to validate.
     threshold : float or int
         the decimal threshold of missing values that is acceptable to check.
         Must be between 0 and 1 (inclusive). For instance, 0.20 for threshold 
@@ -29,7 +29,7 @@ def missing_values_validate(df: pd.DataFrame, col: str | int, threshold: float |
     TypeError
         If df is None or not a pandas DataFrame or
         if threshold is not numeric (float or int) or
-        if col is not a string or an integer.
+        if col is not a string.
     KeyError
         If col does not exist in the dataframe.
     ValueError
@@ -60,15 +60,18 @@ def missing_values_validate(df: pd.DataFrame, col: str | int, threshold: float |
         raise TypeError("Input 3 must be numeric")
     
     if threshold < 0:
-        raise ValueError("Threshold is invalid: larger than 1")
-    
-    if threshold > 1:
         raise ValueError("Threshold is invalid: negative threshold")
     
-    if col is not in df.columns:
+    if threshold > 1:
+        raise ValueError("Threshold is invalid: larger than 1")
+    
+    if df.empty:
+        raise ValueError("Dataframe cannot be empty")
+    
+    try:
+        na_frac = df[col].isna().mean()
+    except KeyError:
         raise KeyError("Column is not found in the Dataframe")
-
-    na_frac = df[col].isna().mean()
 
     if na_frac <= threshold:
         print("The amount of missing values are valid. Checks completed!")
