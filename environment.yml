@@ -3,6 +3,8 @@ channels:
   - conda-forge
 dependencies:
   - python=3.12
+  - jupyterlab
+  - ipykernel
   - conda-lock
   - hatch
   - copier
@@ -10,5 +12,6 @@ dependencies:
   - pip
   - altair
   - pytest
+  - pytest-cov
   - faker
 prefix: C:\Users\jjyor\miniforge3\envs\dsci-524-proj-env
