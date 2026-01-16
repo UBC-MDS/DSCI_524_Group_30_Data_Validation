@@ -8,7 +8,7 @@ def outliers_validate(
     lower_bound: float,
     upper_bound: float,
     threshold: float,
-):
+) -> str:
     """
     Validates that a DataFrame column contains an acceptable proportion
     of values outside a user-defined range.
@@ -55,27 +55,28 @@ def outliers_validate(
         If `col` is not in the DataFrame, if `lower_bound` is not less than
         `upper_bound`, if `threshold` is not between 0 and 1, or if the column
         contains no non-missing values.
-
-    Notes
-    -------
-        Keyword arguments are required for all parameters except
-        the dataframe.
-
-        Validation results are returned as a string.
-
-    Examples
-    --------
-    >>> import pandas as pd
-    >>> df = pd.DataFrame({
-    ...     "age": [18, 22, 25, 30, 120]
-    ... })
-    >>> outliers_validate(
-    ...     dataframe=df,
-    ...     col="age",
-    ...     lower_bound=18,
-    ...     upper_bound=65,
-    ...     threshold=0.2,
-    ... )
-    "The proportion of outliers is within the acceptable threshold. Check complete!"
     """
-    pass
+    if not isinstance(dataframe, pd.DataFrame):
+        raise TypeError("dataframe must be a pandas DataFrame")
+
+    if col not in dataframe.columns:
+        raise ValueError(f"Column '{col}' not found in DataFrame")
+
+    if lower_bound >= upper_bound:
+        raise ValueError("lower_bound must be less than upper_bound")
+
+    if not (0 <= threshold <= 1):
+        raise ValueError("threshold must be between 0 and 1")
+
+    values = dataframe[col].dropna()
+
+    if values.empty:
+        raise ValueError(f"Column '{col}' contains no non-missing values")
+
+    outliers = (values < lower_bound) | (values > upper_bound)
+    outlier_proportion = outliers.mean()
+
+    if outlier_proportion <= threshold:
+        return "The proportion of outliers is within the acceptable threshold. Check complete!"
+
+    return f"The proportion of outliers exceeds the threshold {threshold}. Check complete!"
