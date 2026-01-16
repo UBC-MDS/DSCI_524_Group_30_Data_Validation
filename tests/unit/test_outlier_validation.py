@@ -11,6 +11,7 @@ import pandas as pd
 import pytest
 
 from dsci_524_group_30_data_validation.outlier_validation import outliers_validate
+
 def test_outliers_validate_no_outliers_valid():
     """
     Test that the function returns a success message when there are no outliers
@@ -84,4 +85,33 @@ def test_outliers_validate_invalid_threshold_raises():
             lower_bound=0,
             upper_bound=100,
             threshold=1.5,
+        )
+def test_outliers_validate_all_nan_column_raises():
+    """
+    Test that a ValueError is raised when the specified column contains only
+    missing values (no non-missing values to validate).
+    """
+    df = pd.DataFrame({"x": [None, None, None]})
+    with pytest.raises(ValueError, match="contains no non-missing values"):
+        outliers_validate(
+            dataframe=df,
+            col="x",
+            lower_bound=0,
+            upper_bound=10,
+            threshold=0.2,
+        )
+
+
+def test_outliers_validate_invalid_bounds_equal_raises():
+    """
+    Test that a ValueError is raised when lower_bound equals upper_bound.
+    """
+    df = pd.DataFrame({"x": [1, 2, 3]})
+    with pytest.raises(ValueError, match="lower_bound must be less than upper_bound"):
+        outliers_validate(
+            dataframe=df,
+            col="x",
+            lower_bound=5,
+            upper_bound=5,
+            threshold=0.2,
         )
