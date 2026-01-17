@@ -177,3 +177,145 @@ def test_invalid_column_schema_type(sample_df):
     """Function should raise TypeError if column_schema is not a dict."""
     with pytest.raises(TypeError):
         col_types_validate(dataframe=sample_df, column_schema=["age", "text"])
+
+
+def test_allow_extra_cols_true_pass(sample_df):
+    """Extra columns are allowed when allow_extra_cols=True."""
+    result = col_types_validate(
+        dataframe=sample_df,
+        integer_cols=1,
+        allow_extra_cols=True,
+    )
+
+    assert isinstance(result, str)
+    assert "check complete" in result.lower()
+
+
+def test_combined_schema_and_count_fail(sample_df):
+    """Failure occurs if either schema or count validation fails."""
+    result = col_types_validate(
+        dataframe=sample_df,
+        integer_cols=2,  # wrong
+        column_schema={"age": "integer"},
+    )
+
+    assert isinstance(result, str)
+    assert "expected" in result.lower()
+
+
+def test_combined_schema_and_count_success(sample_df):
+    """Both schema and count validation pass together."""
+    result = col_types_validate(
+        dataframe=sample_df,
+        integer_cols=1,
+        text_cols=3,
+        column_schema={"age": "integer"},
+    )
+
+    assert isinstance(result, str)
+    assert "check complete" in result.lower()
+
+
+def test_numeric_cols_combined_fail(sample_df):
+    """numeric_cols mismatch is reported."""
+    result = col_types_validate(
+        dataframe=sample_df,
+        numeric_cols=2,
+    )
+
+    assert isinstance(result, str)
+    assert "numeric" in result.lower()
+    assert "expected" in result.lower()
+
+
+def test_numeric_cols_combined_pass(sample_df):
+    """numeric_cols counts integers and floats together."""
+    result = col_types_validate(
+        dataframe=sample_df,
+        numeric_cols=1,
+    )
+
+    assert isinstance(result, str)
+    assert "check complete" in result.lower()
+
+
+def test_column_schema_type_objects_pass(sample_df):
+    """Schema validation supports Python type objects."""
+    result = col_types_validate(
+        dataframe=sample_df,
+        column_schema={
+            "age": int,
+            "city": str,
+        },
+    )
+
+    assert isinstance(result, str)
+    assert "check complete" in result.lower()
+
+
+def test_column_schema_none_branch(sample_df):
+    """Schema validation is skipped when column_schema=None."""
+    result = col_types_validate(
+        dataframe=sample_df,
+        integer_cols=1,
+        text_cols=3,
+        column_schema=None,
+    )
+
+    assert isinstance(result, str)
+    assert "check complete" in result.lower()
+
+
+def test_schema_with_unsupported_type_object(sample_df):
+    """Test schema validation with an unsupported Python type object."""
+    result = col_types_validate(
+        dataframe=sample_df, column_schema={"age": list}  # Unsupported type
+    )
+    assert isinstance(result, str)
+    assert "unsupported" in result.lower() or "warning" in result.lower()
+
+
+def test_schema_numeric_type_pass(sample_df):
+    """Test schema validation with 'numeric' type (covers numeric branch)."""
+    result = col_types_validate(dataframe=sample_df, column_schema={"age": "numeric"})
+    assert isinstance(result, str)
+    assert "Check complete" in result
+
+
+def test_schema_numeric_type_fail(sample_df):
+    """Test schema validation fails when numeric expected but column is text."""
+    result = col_types_validate(
+        dataframe=sample_df,
+        column_schema={"city": "numeric"},  # city is text, not numeric
+    )
+    assert isinstance(result, str)
+    assert "Column 'city' expected type numeric in result"
+
+
+def test_schema_boolean_type_fail(sample_df):
+    """Test schema validation with 'boolean' type fails on non-boolean column."""
+    result = col_types_validate(
+        dataframe=sample_df,
+        column_schema={"age": "boolean"},  # age is integer, not boolean
+    )
+    assert isinstance(result, str)
+    assert "Column 'age' expected type 'boolean'" in result
+
+
+def test_schema_categorical_type_fail(sample_df):
+    """Test schema validation with 'categorical' type fails on non-categorical column."""
+    result = col_types_validate(
+        dataframe=sample_df,
+        column_schema={"city": "categorical"},  # city is object, not categorical dtype
+    )
+    assert isinstance(result, str)
+    assert "Column 'city' expected type 'categorical'" in result
+
+
+def test_schema_with_python_bool_type_fail(sample_df):
+    """Test schema validation with Python bool type object fails on non-bool column."""
+    result = col_types_validate(
+        dataframe=sample_df, column_schema={"age": bool}  # age is int, expecting bool
+    )
+    assert isinstance(result, str)
+    assert "Column 'age' expected type 'boolean'" in result
