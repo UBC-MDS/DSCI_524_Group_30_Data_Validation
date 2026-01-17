@@ -4,13 +4,16 @@ Unit tests for `outliers_validate`.
 These tests cover key edge cases based on the function specification:
 - valid case with no outliers
 - valid case when outlier proportion equals threshold
+- valid case when outlier proportion is just below the threshold
+- invalid case when outlier proportion is just above the threshold
 - invalid case when outlier proportion exceeds threshold
-- invalid inputs (missing column, invalid threshold)
+- invalid inputs (missing column, invalid threshold, invalid bounds, non-dataframe)
 """
 import pandas as pd
 import pytest
 
 from dsci_524_group_30_data_validation.outlier_validation import outliers_validate
+
 
 def test_outliers_validate_no_outliers_valid():
     """
@@ -27,6 +30,7 @@ def test_outliers_validate_no_outliers_valid():
     )
     assert result == "The proportion of outliers is within the acceptable threshold. Check complete!"
 
+
 def test_outliers_validate_outliers_equal_threshold_valid():
     """
     Test that the function returns a success message when the outlier proportion
@@ -41,6 +45,40 @@ def test_outliers_validate_outliers_equal_threshold_valid():
         threshold=0.2,
     )
     assert result == "The proportion of outliers is within the acceptable threshold. Check complete!"
+
+
+def test_outliers_validate_outliers_just_below_threshold_valid():
+    """
+    Test that the function returns a success message when the outlier proportion
+    is slightly below the threshold.
+    """
+    df = pd.DataFrame({"age": [18, 20, 30, 40, 50, 60, 120]})  # 1 outlier / 7 ≈ 0.1429
+    result = outliers_validate(
+        dataframe=df,
+        col="age",
+        lower_bound=18,
+        upper_bound=65,
+        threshold=0.2,
+    )
+    assert result == "The proportion of outliers is within the acceptable threshold. Check complete!"
+
+
+def test_outliers_validate_outliers_just_above_threshold_invalid():
+    """
+    Test that the function returns a failure message when the outlier proportion
+    is slightly above the threshold.
+    """
+    df = pd.DataFrame({"age": [10, 20, 30, 40, 50, 60, 120]})  # 2 outliers / 7 ≈ 0.2857
+    result = outliers_validate(
+        dataframe=df,
+        col="age",
+        lower_bound=18,
+        upper_bound=65,
+        threshold=0.2,
+    )
+    assert result == "The proportion of outliers exceeds the threshold 0.2. Check complete!"
+
+
 def test_outliers_validate_outliers_exceed_threshold_invalid():
     """
     Test that the function returns a failure message when the outlier proportion
@@ -86,6 +124,8 @@ def test_outliers_validate_invalid_threshold_raises():
             upper_bound=100,
             threshold=1.5,
         )
+
+
 def test_outliers_validate_all_nan_column_raises():
     """
     Test that a ValueError is raised when the specified column contains only
@@ -115,6 +155,8 @@ def test_outliers_validate_invalid_bounds_equal_raises():
             upper_bound=5,
             threshold=0.2,
         )
+
+
 def test_outliers_validate_non_dataframe_raises():
     """
     Test that a TypeError is raised when the input is not a pandas DataFrame.
