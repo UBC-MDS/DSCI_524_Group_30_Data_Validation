@@ -1,3 +1,6 @@
+import pandas as pd
+
+
 def outliers_validate(
     dataframe: pd.DataFrame,
     *,
@@ -5,15 +8,20 @@ def outliers_validate(
     lower_bound: float,
     upper_bound: float,
     threshold: float,
-):
+) -> str:
     """
     Validates that a DataFrame column contains an acceptable proportion
     of values outside a user-defined range.
 
     This function performs validation checks to ensure that the proportion
-    of values in the specified column that fall outside the given lower
+   of non-missing values in the specified column that fall outside the given lower
     and upper bounds does not exceed the specified threshold.
     Keyword arguments are required.
+
+    Outliers are defined as values strictly less than `lower_bound` or strictly
+    greater than `upper_bound`. Values equal to the bounds are not considered
+    outliers. Missing values (NaN) are ignored when calculating the outlier
+    proportion.
 
     Parameters
     ----------
@@ -39,26 +47,36 @@ def outliers_validate(
         within the acceptable threshold, or reports that the threshold
         has been exceeded.
 
-    Notes
-    -------
-        Keyword arguments are required for all parameters except
-        the dataframe.
-
-        Validation results are returned as a string.
-
-    Examples
-    --------
-    >>> import pandas as pd
-    >>> df = pd.DataFrame({
-    ...     "age": [18, 22, 25, 30, 120]
-    ... })
-    >>> outliers_validate(
-    ...     dataframe=df,
-    ...     col="age",
-    ...     lower_bound=18,
-    ...     upper_bound=65,
-    ...     threshold=0.2,
-    ... )
-    "The proportion of outliers is within the acceptable threshold. Check complete!"
+    Raises
+    ------
+    TypeError
+        If `dataframe` is not a pandas DataFrame.
+    ValueError
+        If `col` is not in the DataFrame, if `lower_bound` is not less than
+        `upper_bound`, if `threshold` is not between 0 and 1, or if the column
+        contains no non-missing values.
     """
-    pass
+    if not isinstance(dataframe, pd.DataFrame):
+        raise TypeError("dataframe must be a pandas DataFrame")
+
+    if col not in dataframe.columns:
+        raise ValueError(f"Column '{col}' not found in DataFrame")
+
+    if lower_bound >= upper_bound:
+        raise ValueError("lower_bound must be less than upper_bound")
+
+    if not (0 <= threshold <= 1):
+        raise ValueError("threshold must be between 0 and 1")
+
+    values = dataframe[col].dropna()
+
+    if values.empty:
+        raise ValueError(f"Column '{col}' contains no non-missing values")
+
+    outliers = (values < lower_bound) | (values > upper_bound)
+    outlier_proportion = outliers.mean()
+
+    if outlier_proportion <= threshold:
+        return "The proportion of outliers is within the acceptable threshold. Check complete!"
+
+    return f"The proportion of outliers exceeds the threshold {threshold}. Check complete!"
