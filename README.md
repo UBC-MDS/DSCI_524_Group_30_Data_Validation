@@ -14,7 +14,7 @@ informative, and concise output from running each function, designed to help to 
 
 The project looks to re-imagine some of the functions of [Pandera](https://pandera.readthedocs.io/en/stable/) in a more user-friendly way. It aims mainly to improve output of the Panderas function, making it more informative and interpretable.
 
-## Setting up the Developement Environment
+## Setting up the Development Environment
 
 1. To get started, clone the repository to your local device.
 
@@ -24,13 +24,13 @@ The project looks to re-imagine some of the functions of [Pandera](https://pande
 cd DSCI_524_Group_30_Data_Validation
 ```
 
-1. Create the Conda environment from the lock file
+3. Create the Conda environment from the lock file
 
 ```bash
 conda-lock install -n project-env conda-lock.yml
 ```
 
-1. Activate the environment
+4. Activate the environment
 
 ```bash
 conda activate project-env
@@ -38,7 +38,7 @@ conda activate project-env
 
 You should now see (project-env) in your terminal prompt.
 
-1. Make sure you have quarto installed. You can install from here:
+5. Make sure you have quarto installed. You can install from here:
 
 <https://quarto.org/docs/get-started/>
 
