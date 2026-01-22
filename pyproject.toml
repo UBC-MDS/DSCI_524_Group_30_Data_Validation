@@ -49,7 +49,7 @@ Download = "https://pypi.org/project/dsci_524_group_30_data_validation/#files"
 dev = [
     "hatch",
     "pre-commit",
-    "ruff"
+    "ruff",
 ]
 
 docs = [
@@ -71,8 +71,8 @@ tests = [
     "pytest-cov",
     "pytest-raises",
     "pytest-randomly",
-    "pytest-xdist",,
-    "pandas"
+    "pytest-xdist",
+    "pandas",
 ]
 
 
