@@ -18,13 +18,17 @@ The project looks to re-imagine some of the functions of [Pandera](https://pande
 
 1. To get started, clone the repository to your local device.
 
-2. Create the Conda environment from the lock file
+3. change directory into the repository
+
+cd DSCI_524_Group_30_Data_Validation
+
+4. Create the Conda environment from the lock file
 
 ```
 conda-lock install -n project-env conda-lock.yml
 ```
 
-1. Activate the environment
+5. Activate the environment
 
 ```
 conda activate project-env
