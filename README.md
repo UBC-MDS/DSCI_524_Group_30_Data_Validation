@@ -14,43 +14,81 @@ informative, and concise output from running each function, designed to help to 
 
 The project looks to re-imagine some of the functions of [Pandera](https://pandera.readthedocs.io/en/stable/) in a more user-friendly way. It aims mainly to improve output of the Panderas function, making it more informative and interpretable.
 
-## Getting Started
+## Setting up the Development Environment
 
 1. To get started, clone the repository to your local device.
 
-3. change directory into the repository
+2. Change directory into the repository
 
+```bash
 cd DSCI_524_Group_30_Data_Validation
-
-4. Create the Conda environment from the lock file
-
 ```
+
+3. Create the Conda environment from the lock file
+
+```bash
 conda-lock install -n project-env conda-lock.yml
 ```
 
-5. Activate the environment
+4. Activate the environment
 
-```
+```bash
 conda activate project-env
 ```
 
 You should now see (project-env) in your terminal prompt.
 
+5. Make sure you have quarto installed. You can install from here:
+
+<https://quarto.org/docs/get-started/>
+
 ## Installing the Package
 
-You can install this package into your preferred Python environment using pip:
+You can install this package from the local source into your preferred Python environment using pip:
 
 ```bash
-pip install dsci_524_group_30_data_validation
+pip install -e .
 ```
 
-TODO: Add a brief example of how to use the package to this section
+## Running Tests
 
-To use dsci_524_group_30_data_validation in your code:
+You can run tests which validate all functions in the package using pytest.
+
+```bash
+pytest -v
+```
+
+-v results in a more verbose output, showing the names of all tests and if they pass or not.
+
+## Build Documentation
+
+```bash
+quartodoc build --watch
+
+quarto preview
+```
+
+Documentation deployment is automated.
+
+## Example Use
 
 ```python
->>> import dsci_524_group_30_data_validation
->>> dsci_524_group_30_data_validation.hello_world()
+   >>> import pandas as pd
+    >>> df = pd.DataFrame({
+    ...     "city": ["Vancouver", "Toronto", "Calgary", None],
+    ...     "gender": ["M", "F", "F", "M"],
+    ...     "age": [25, 32, 41, 29]
+    ... })
+    >>> categorical_validate(
+    ...     dataframe=df,
+    ...     column="city",
+    ...     num_cat=3,
+    ...     case="title",
+    ...     spaces=False
+    ... )
+    Expected and actual number of categories are equal
+    All categories are in title case
+    'Checks completed!'
 ```
 
 ## Contributors
