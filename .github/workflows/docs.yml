@@ -11,17 +11,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v4.5.2
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548 # v5.1.0
+      - name: Check-out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-            python-version: ${{ matrix.python-version }}
+          python-version: "3.12"
+
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
 
       - name: Install hatch
         run: |
-            python -m pip install --upgrade pip
-            python -m pip install hatch
+          python -m pip install --upgrade pip
+          python -m pip install hatch
 
       - name: Build documentation using Hatch
         run: |
-            hatch run docs:build
+          hatch run docs:build
