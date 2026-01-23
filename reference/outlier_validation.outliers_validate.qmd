@@ -11,48 +11,78 @@ outlier_validation.outliers_validate(
 )
 ```
 
- Validates that a DataFrame column contains an acceptable proportion
- of values outside a user-defined range.
+Validates that a DataFrame column contains an acceptable proportion
+of values outside a user-defined range.
 
- This function performs validation checks to ensure that the proportion
-of non-missing values in the specified column that fall outside the given lower
- and upper bounds does not exceed the specified threshold.
- Keyword arguments are required.
+This function checks whether the proportion of non-missing values in the
+specified column that fall outside the interval [`lower_bound`, `upper_bound`]
+is less than or equal to the given `threshold`.
 
- Outliers are defined as values strictly less than `lower_bound` or strictly
- greater than `upper_bound`. Values equal to the bounds are not considered
- outliers. Missing values (NaN) are ignored when calculating the outlier
- proportion.
+Outliers are defined as values strictly less than `lower_bound` or strictly
+greater than `upper_bound`. Values equal to the bounds are not considered
+outliers. Missing values (NaN) are ignored when calculating the outlier
+proportion.
 
-##  Parameters {.doc-section .doc-section--parameters}
+All arguments except `dataframe` are keyword-only.
 
- dataframe : pd.DataFrame
-     The DataFrame containing the data to validate.
+## Parameters {.doc-section .doc-section-parameters}
 
- col : str
-     The column in which outliers will be identified.
+| Name        | Type         | Description                                                      | Default    |
+|-------------|--------------|------------------------------------------------------------------|------------|
+| dataframe   | pd.DataFrame | The DataFrame containing the data to validate.                   | _required_ |
+| col         | str          | Name of the column in which outliers will be identified.         | _required_ |
+| lower_bound | float        | The lower bound of the acceptable value range.                   | _required_ |
+| upper_bound | float        | The upper bound of the acceptable value range.                   | _required_ |
+| threshold   | float        | The maximum acceptable proportion of outliers (between 0 and 1). | _required_ |
 
- lower_bound : float
-     The lower bound of the acceptable value range.
+## Returns {.doc-section .doc-section-returns}
 
- upper_bound : float
-     The upper bound of the acceptable value range.
+| Name   | Type   | Description                                                                                                                                                                                                                                                                                                                                                            |
+|--------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|        | str    | A message stating whether the outlier proportion is within the acceptable threshold.  If the outlier proportion is less than or equal to `threshold`, the function returns:  "The proportion of outliers is within the acceptable threshold. Check complete!"  Otherwise, it returns:  "The proportion of outliers exceeds the threshold {threshold}. Check complete!" |
 
- threshold : float
-     The maximum acceptable proportion of outliers (between 0 and 1).
+## Raises {.doc-section .doc-section-raises}
 
-##  Returns {.doc-section .doc-section--returns}
+| Name   | Type       | Description                                                                                                                                                                                          |
+|--------|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|        | TypeError  | If `dataframe` is not a pandas DataFrame.                                                                                                                                                            |
+|        | ValueError | If `col` is not found in the DataFrame. If `lower_bound` is greater than or equal to `upper_bound`. If `threshold` is not between 0 and 1 (inclusive). If the column contains no non-missing values. |
 
- str
-     Message which either confirms that the proportion of outliers is
-     within the acceptable threshold, or reports that the threshold
-     has been exceeded.
+## Notes {.doc-section .doc-section-notes}
 
-##  Raises {.doc-section .doc-section--raises}
+- Outliers are values strictly outside the interval
+  (`lower_bound`, `upper_bound`).
+- Missing values are ignored when calculating the outlier proportion.
+- This function requires keyword arguments for `col`, `lower_bound`,
+  `upper_bound`, and `threshold`.
 
- TypeError
-     If `dataframe` is not a pandas DataFrame.
- ValueError
-     If `col` is not in the DataFrame, if `lower_bound` is not less than
-     `upper_bound`, if `threshold` is not between 0 and 1, or if the column
-     contains no non-missing values.
+## Examples {.doc-section .doc-section-examples}
+
+Example where outlier proportion is within the threshold:
+
+```python
+>>> import pandas as pd
+>>> df = pd.DataFrame({"age": [25, 32, 41, 29, 200]})
+>>> outliers_validate(
+...     dataframe=df,
+...     col="age",
+...     lower_bound=0,
+...     upper_bound=100,
+...     threshold=0.20
+... )
+'The proportion of outliers is within the acceptable threshold. Check complete!'
+```
+
+Example where outlier proportion exceeds the threshold:
+
+```python
+>>> df = pd.DataFrame({"score": [10, 12, 999, 11, 1000]})
+>>> outliers_validate(
+...     dataframe=df,
+...     col="score",
+...     lower_bound=0,
+...     upper_bound=100,
+...     threshold=0.10
+... )
+'The proportion of outliers exceeds the threshold 0.1. Check complete!'
+```

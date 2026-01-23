@@ -155,6 +155,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#parameters" id="toc-parameters" class="nav-link" data-scroll-target="#parameters">Parameters</a></li>
   <li><a href="#returns" id="toc-returns" class="nav-link" data-scroll-target="#returns">Returns</a></li>
   <li><a href="#raises" id="toc-raises" class="nav-link" data-scroll-target="#raises">Raises</a></li>
+  <li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes">Notes</a></li>
+  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Examples</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -176,23 +178,144 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    threshold,</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Validates that a DataFrame column contains an acceptable proportion of values outside a user-defined range.</p>
-<p>This function performs validation checks to ensure that the proportion of non-missing values in the specified column that fall outside the given lower and upper bounds does not exceed the specified threshold. Keyword arguments are required.</p>
+<p>This function checks whether the proportion of non-missing values in the specified column that fall outside the interval [<code>lower_bound</code>, <code>upper_bound</code>] is less than or equal to the given <code>threshold</code>.</p>
 <p>Outliers are defined as values strictly less than <code>lower_bound</code> or strictly greater than <code>upper_bound</code>. Values equal to the bounds are not considered outliers. Missing values (NaN) are ignored when calculating the outlier proportion.</p>
-<section id="parameters" class="level2 doc-section doc-section--parameters">
-<h2 class="doc-section doc-section--parameters anchored" data-anchor-id="parameters">Parameters</h2>
-<p>dataframe : pd.DataFrame The DataFrame containing the data to validate.</p>
-<p>col : str The column in which outliers will be identified.</p>
-<p>lower_bound : float The lower bound of the acceptable value range.</p>
-<p>upper_bound : float The upper bound of the acceptable value range.</p>
-<p>threshold : float The maximum acceptable proportion of outliers (between 0 and 1).</p>
+<p>All arguments except <code>dataframe</code> are keyword-only.</p>
+<section id="parameters" class="level2 doc-section doc-section-parameters">
+<h2 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters">Parameters</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 13%">
+<col style="width: 62%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>dataframe</td>
+<td>pd.DataFrame</td>
+<td>The DataFrame containing the data to validate.</td>
+<td><em>required</em></td>
+</tr>
+<tr class="even">
+<td>col</td>
+<td>str</td>
+<td>Name of the column in which outliers will be identified.</td>
+<td><em>required</em></td>
+</tr>
+<tr class="odd">
+<td>lower_bound</td>
+<td>float</td>
+<td>The lower bound of the acceptable value range.</td>
+<td><em>required</em></td>
+</tr>
+<tr class="even">
+<td>upper_bound</td>
+<td>float</td>
+<td>The upper bound of the acceptable value range.</td>
+<td><em>required</em></td>
+</tr>
+<tr class="odd">
+<td>threshold</td>
+<td>float</td>
+<td>The maximum acceptable proportion of outliers (between 0 and 1).</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
 </section>
-<section id="returns" class="level2 doc-section doc-section--returns">
-<h2 class="doc-section doc-section--returns anchored" data-anchor-id="returns">Returns</h2>
-<p>str Message which either confirms that the proportion of outliers is within the acceptable threshold, or reports that the threshold has been exceeded.</p>
+<section id="returns" class="level2 doc-section doc-section-returns">
+<h2 class="doc-section doc-section-returns anchored" data-anchor-id="returns">Returns</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 95%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>str</td>
+<td>A message stating whether the outlier proportion is within the acceptable threshold. If the outlier proportion is less than or equal to <code>threshold</code>, the function returns: “The proportion of outliers is within the acceptable threshold. Check complete!” Otherwise, it returns: “The proportion of outliers exceeds the threshold {threshold}. Check complete!”</td>
+</tr>
+</tbody>
+</table>
 </section>
-<section id="raises" class="level2 doc-section doc-section--raises">
-<h2 class="doc-section doc-section--raises anchored" data-anchor-id="raises">Raises</h2>
-<p>TypeError If <code>dataframe</code> is not a pandas DataFrame. ValueError If <code>col</code> is not in the DataFrame, if <code>lower_bound</code> is not less than <code>upper_bound</code>, if <code>threshold</code> is not between 0 and 1, or if the column contains no non-missing values.</p>
+<section id="raises" class="level2 doc-section doc-section-raises">
+<h2 class="doc-section doc-section-raises anchored" data-anchor-id="raises">Raises</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 3%">
+<col style="width: 5%">
+<col style="width: 90%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>TypeError</td>
+<td>If <code>dataframe</code> is not a pandas DataFrame.</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>ValueError</td>
+<td>If <code>col</code> is not found in the DataFrame. If <code>lower_bound</code> is greater than or equal to <code>upper_bound</code>. If <code>threshold</code> is not between 0 and 1 (inclusive). If the column contains no non-missing values.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="notes" class="level2 doc-section doc-section-notes">
+<h2 class="doc-section doc-section-notes anchored" data-anchor-id="notes">Notes</h2>
+<ul>
+<li>Outliers are values strictly outside the interval (<code>lower_bound</code>, <code>upper_bound</code>).</li>
+<li>Missing values are ignored when calculating the outlier proportion.</li>
+<li>This function requires keyword arguments for <code>col</code>, <code>lower_bound</code>, <code>upper_bound</code>, and <code>threshold</code>.</li>
+</ul>
+</section>
+<section id="examples" class="level2 doc-section doc-section-examples">
+<h2 class="doc-section doc-section-examples anchored" data-anchor-id="examples">Examples</h2>
+<p>Example where outlier proportion is within the threshold:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> df <span class="op">=</span> pd.DataFrame({<span class="st">"age"</span>: [<span class="dv">25</span>, <span class="dv">32</span>, <span class="dv">41</span>, <span class="dv">29</span>, <span class="dv">200</span>]})</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> outliers_validate(</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>...     dataframe<span class="op">=</span>df,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>...     col<span class="op">=</span><span class="st">"age"</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>...     lower_bound<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>...     upper_bound<span class="op">=</span><span class="dv">100</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>...     threshold<span class="op">=</span><span class="fl">0.20</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>... )</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">'The proportion of outliers is within the acceptable threshold. Check complete!'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Example where outlier proportion exceeds the threshold:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> df <span class="op">=</span> pd.DataFrame({<span class="st">"score"</span>: [<span class="dv">10</span>, <span class="dv">12</span>, <span class="dv">999</span>, <span class="dv">11</span>, <span class="dv">1000</span>]})</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> outliers_validate(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>...     dataframe<span class="op">=</span>df,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>...     col<span class="op">=</span><span class="st">"score"</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>...     lower_bound<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>...     upper_bound<span class="op">=</span><span class="dv">100</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>...     threshold<span class="op">=</span><span class="fl">0.10</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>... )</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">'The proportion of outliers exceeds the threshold 0.1. Check complete!'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>

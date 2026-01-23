@@ -4,28 +4,42 @@
     "href": "reference/outlier_validation.outliers_validate.html",
     "title": "outlier_validation.outliers_validate",
     "section": "",
-    "text": "outlier_validation.outliers_validate(\n    dataframe,\n    *,\n    col,\n    lower_bound,\n    upper_bound,\n    threshold,\n)\nValidates that a DataFrame column contains an acceptable proportion of values outside a user-defined range.\nThis function performs validation checks to ensure that the proportion of non-missing values in the specified column that fall outside the given lower and upper bounds does not exceed the specified threshold. Keyword arguments are required.\nOutliers are defined as values strictly less than lower_bound or strictly greater than upper_bound. Values equal to the bounds are not considered outliers. Missing values (NaN) are ignored when calculating the outlier proportion.\n\n\ndataframe : pd.DataFrame The DataFrame containing the data to validate.\ncol : str The column in which outliers will be identified.\nlower_bound : float The lower bound of the acceptable value range.\nupper_bound : float The upper bound of the acceptable value range.\nthreshold : float The maximum acceptable proportion of outliers (between 0 and 1).\n\n\n\nstr Message which either confirms that the proportion of outliers is within the acceptable threshold, or reports that the threshold has been exceeded.\n\n\n\nTypeError If dataframe is not a pandas DataFrame. ValueError If col is not in the DataFrame, if lower_bound is not less than upper_bound, if threshold is not between 0 and 1, or if the column contains no non-missing values."
+    "text": "outlier_validation.outliers_validate(\n    dataframe,\n    *,\n    col,\n    lower_bound,\n    upper_bound,\n    threshold,\n)\nValidates that a DataFrame column contains an acceptable proportion of values outside a user-defined range.\nThis function checks whether the proportion of non-missing values in the specified column that fall outside the interval [lower_bound, upper_bound] is less than or equal to the given threshold.\nOutliers are defined as values strictly less than lower_bound or strictly greater than upper_bound. Values equal to the bounds are not considered outliers. Missing values (NaN) are ignored when calculating the outlier proportion.\nAll arguments except dataframe are keyword-only.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\ndataframe\npd.DataFrame\nThe DataFrame containing the data to validate.\nrequired\n\n\ncol\nstr\nName of the column in which outliers will be identified.\nrequired\n\n\nlower_bound\nfloat\nThe lower bound of the acceptable value range.\nrequired\n\n\nupper_bound\nfloat\nThe upper bound of the acceptable value range.\nrequired\n\n\nthreshold\nfloat\nThe maximum acceptable proportion of outliers (between 0 and 1).\nrequired\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nstr\nA message stating whether the outlier proportion is within the acceptable threshold. If the outlier proportion is less than or equal to threshold, the function returns: “The proportion of outliers is within the acceptable threshold. Check complete!” Otherwise, it returns: “The proportion of outliers exceeds the threshold {threshold}. Check complete!”\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nTypeError\nIf dataframe is not a pandas DataFrame.\n\n\n\nValueError\nIf col is not found in the DataFrame. If lower_bound is greater than or equal to upper_bound. If threshold is not between 0 and 1 (inclusive). If the column contains no non-missing values.\n\n\n\n\n\n\n\nOutliers are values strictly outside the interval (lower_bound, upper_bound).\nMissing values are ignored when calculating the outlier proportion.\nThis function requires keyword arguments for col, lower_bound, upper_bound, and threshold.\n\n\n\n\nExample where outlier proportion is within the threshold:\n&gt;&gt;&gt; import pandas as pd\n&gt;&gt;&gt; df = pd.DataFrame({\"age\": [25, 32, 41, 29, 200]})\n&gt;&gt;&gt; outliers_validate(\n...     dataframe=df,\n...     col=\"age\",\n...     lower_bound=0,\n...     upper_bound=100,\n...     threshold=0.20\n... )\n'The proportion of outliers is within the acceptable threshold. Check complete!'\nExample where outlier proportion exceeds the threshold:\n&gt;&gt;&gt; df = pd.DataFrame({\"score\": [10, 12, 999, 11, 1000]})\n&gt;&gt;&gt; outliers_validate(\n...     dataframe=df,\n...     col=\"score\",\n...     lower_bound=0,\n...     upper_bound=100,\n...     threshold=0.10\n... )\n'The proportion of outliers exceeds the threshold 0.1. Check complete!'"
   },
   {
     "objectID": "reference/outlier_validation.outliers_validate.html#parameters",
     "href": "reference/outlier_validation.outliers_validate.html#parameters",
     "title": "outlier_validation.outliers_validate",
     "section": "",
-    "text": "dataframe : pd.DataFrame The DataFrame containing the data to validate.\ncol : str The column in which outliers will be identified.\nlower_bound : float The lower bound of the acceptable value range.\nupper_bound : float The upper bound of the acceptable value range.\nthreshold : float The maximum acceptable proportion of outliers (between 0 and 1)."
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\ndataframe\npd.DataFrame\nThe DataFrame containing the data to validate.\nrequired\n\n\ncol\nstr\nName of the column in which outliers will be identified.\nrequired\n\n\nlower_bound\nfloat\nThe lower bound of the acceptable value range.\nrequired\n\n\nupper_bound\nfloat\nThe upper bound of the acceptable value range.\nrequired\n\n\nthreshold\nfloat\nThe maximum acceptable proportion of outliers (between 0 and 1).\nrequired"
   },
   {
     "objectID": "reference/outlier_validation.outliers_validate.html#returns",
     "href": "reference/outlier_validation.outliers_validate.html#returns",
     "title": "outlier_validation.outliers_validate",
     "section": "",
-    "text": "str Message which either confirms that the proportion of outliers is within the acceptable threshold, or reports that the threshold has been exceeded."
+    "text": "Name\nType\nDescription\n\n\n\n\n\nstr\nA message stating whether the outlier proportion is within the acceptable threshold. If the outlier proportion is less than or equal to threshold, the function returns: “The proportion of outliers is within the acceptable threshold. Check complete!” Otherwise, it returns: “The proportion of outliers exceeds the threshold {threshold}. Check complete!”"
   },
   {
     "objectID": "reference/outlier_validation.outliers_validate.html#raises",
     "href": "reference/outlier_validation.outliers_validate.html#raises",
     "title": "outlier_validation.outliers_validate",
     "section": "",
-    "text": "TypeError If dataframe is not a pandas DataFrame. ValueError If col is not in the DataFrame, if lower_bound is not less than upper_bound, if threshold is not between 0 and 1, or if the column contains no non-missing values."
+    "text": "Name\nType\nDescription\n\n\n\n\n\nTypeError\nIf dataframe is not a pandas DataFrame.\n\n\n\nValueError\nIf col is not found in the DataFrame. If lower_bound is greater than or equal to upper_bound. If threshold is not between 0 and 1 (inclusive). If the column contains no non-missing values."
+  },
+  {
+    "objectID": "reference/outlier_validation.outliers_validate.html#notes",
+    "href": "reference/outlier_validation.outliers_validate.html#notes",
+    "title": "outlier_validation.outliers_validate",
+    "section": "",
+    "text": "Outliers are values strictly outside the interval (lower_bound, upper_bound).\nMissing values are ignored when calculating the outlier proportion.\nThis function requires keyword arguments for col, lower_bound, upper_bound, and threshold."
+  },
+  {
+    "objectID": "reference/outlier_validation.outliers_validate.html#examples",
+    "href": "reference/outlier_validation.outliers_validate.html#examples",
+    "title": "outlier_validation.outliers_validate",
+    "section": "",
+    "text": "Example where outlier proportion is within the threshold:\n&gt;&gt;&gt; import pandas as pd\n&gt;&gt;&gt; df = pd.DataFrame({\"age\": [25, 32, 41, 29, 200]})\n&gt;&gt;&gt; outliers_validate(\n...     dataframe=df,\n...     col=\"age\",\n...     lower_bound=0,\n...     upper_bound=100,\n...     threshold=0.20\n... )\n'The proportion of outliers is within the acceptable threshold. Check complete!'\nExample where outlier proportion exceeds the threshold:\n&gt;&gt;&gt; df = pd.DataFrame({\"score\": [10, 12, 999, 11, 1000]})\n&gt;&gt;&gt; outliers_validate(\n...     dataframe=df,\n...     col=\"score\",\n...     lower_bound=0,\n...     upper_bound=100,\n...     threshold=0.10\n... )\n'The proportion of outliers exceeds the threshold 0.1. Check complete!'"
   },
   {
     "objectID": "reference/index.html",
