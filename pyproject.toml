@@ -173,7 +173,7 @@ features = [
 #serve = ["sphinx-autobuild docs --watch src/dsci_524_group_30_data_validation {args:-b html docs/_build/serve}"]
 build = [
   "quartodoc build",
-  "quarto render docs",
+  "quarto render .",
 ]
 
 
