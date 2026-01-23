@@ -1,0 +1,47 @@
+# missing_values_validate.missing_values_validate { #dsci_524_group_30_data_validation.missing_values_validate.missing_values_validate }
+
+```python
+missing_values_validate.missing_values_validate(df, col, threshold)
+```
+
+Validate the amount of missing values in a pandas DataFrame.
+
+This function checks whether the given column in the pandas
+DataFrame has missing values at or below the given threshold.
+
+## Parameters {.doc-section .doc-section-parameters}
+
+| Name      | Type         | Description                                                                                                                                                                                                        | Default    |
+|-----------|--------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|
+| df        | pd.DataFrame | the pandas DataFrame containing missing values.                                                                                                                                                                    | _required_ |
+| col       | str          | the column name (str) containing missing values to validate.                                                                                                                                                       | _required_ |
+| threshold | float or int | the decimal threshold of missing values that is acceptable to check. Must be between 0 and 1 (inclusive). For instance, 0.20 for threshold  means only 20% or lower of the observations are allowed to be missing. | _required_ |
+
+## Returns {.doc-section .doc-section-returns}
+
+| Name   | Type   | Description                                                                             |
+|--------|--------|-----------------------------------------------------------------------------------------|
+|        | bool   | True if the proportion of missing values is at or below the threshold, otherwise False. |
+
+## Raises {.doc-section .doc-section-raises}
+
+| Name   | Type       | Description                                                                                                      |
+|--------|------------|------------------------------------------------------------------------------------------------------------------|
+|        | TypeError  | If df is None or not a pandas DataFrame or if threshold is not numeric (float or int) or if col is not a string. |
+|        | KeyError   | If col does not exist in the dataframe.                                                                          |
+|        | ValueError | If threshold is not between 0.0 and 1.0 (inclusive)                                                              |
+
+## Examples {.doc-section .doc-section-examples}
+
+```python
+>>> import pandas as pd
+>>> data = pd.DataFrame({
+        "name": ["Alex", None, None, "Austin", None],
+        "age": [21, 43, 23, None, 38],
+        "sex": ["M", "F", "F", "M", "F"],
+        "married": [True, False, None, None, True]})
+>>> missing_values_validate(df=data, col="age", threshold=0.25)
+True
+>>> missing_values_validate(df=data, col="name", threshold=0.05)
+False
+```

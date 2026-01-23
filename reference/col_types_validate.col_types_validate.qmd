@@ -1,0 +1,112 @@
+# col_types_validate.col_types_validate { #dsci_524_group_30_data_validation.col_types_validate.col_types_validate }
+
+```python
+col_types_validate.col_types_validate(
+    dataframe,
+    *,
+    numeric_cols=0,
+    integer_cols=0,
+    float_cols=0,
+    boolean_cols=0,
+    categorical_cols=0,
+    text_cols=0,
+    datetime_cols=0,
+    allow_extra_cols=True,
+    column_schema=None,
+)
+```
+
+Validates that a DataFrame contains the expected number of each
+logical column category and/or that specific columns match
+expected data types.
+
+This function performs two types of validation on a Pandas DataFrame:
+
+1. Count-based validation: Ensures the DataFrame contains the
+expected number of columns in each logical column category
+(e.g., numeric, text, categorical).
+
+2. Column-specific validation: Ensures that user-specified
+column names exist in the DataFrame and match their expected
+logical data types.
+
+All column count arguments are keyword-only. Users may also choose
+to allow extra, unspecified columns. All lowercase.
+
+## Parameters {.doc-section .doc-section-parameters}
+
+| Name             | Type                     | Description                                                                                                                                                  | Default    |
+|------------------|--------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|
+| dataframe        | pd.DataFrame             | The DataFrame to validate.                                                                                                                                   | _required_ |
+| numeric_cols     | int                      | Total number of numeric columns (integers and floats combined).                                                                                              | `0`        |
+| integer_cols     | int                      | Number of integer-valued numeric columns.                                                                                                                    | `0`        |
+| float_cols       | int                      | Number of floating-point numeric columns.                                                                                                                    | `0`        |
+| boolean_cols     | int                      | Number of boolean columns.                                                                                                                                   | `0`        |
+| categorical_cols | int                      | Number of categorical columns (pandas 'category' dtype).                                                                                                     | `0`        |
+| text_cols        | int                      | Number of text columns ('string' or 'object' dtype).                                                                                                         | `0`        |
+| datetime_cols    | int                      | Number of datetime-like columns ('datetime64' or timezone-aware).                                                                                            | `0`        |
+| allow_extra_cols | bool                     | Whether to allow columns that are not accounted for by the specified validation rules. If False, unexpected columns will be reported as validation failures. | `False`    |
+| column_schema    | dict\[str, str or type\] | Mapping of column names to expected logical data types. Each specified column must exist in the DataFrame and match the expected type.                       | `None`     |
+| Supported        |                          | - "numeric" - "integer" - "float" - "boolean" - "categorical" - "text" - "datetime"                                                                          | _required_ |
+
+## Returns {.doc-section .doc-section-returns}
+
+| Name   | Type   | Description                                                                                                                                   |
+|--------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------|
+|        | str    | A message stating whether all checks passed. If validation fails, the message describes which columns are missing, mismatched, or unexpected. |
+
+## Notes {.doc-section .doc-section-notes}
+
+- Keyword arguments are required for all column type arguments.
+- Count-based and column-specific validation may be used together.
+- If both validation modes are provided, both must pass for
+validation to check complete.
+
+## Examples {.doc-section .doc-section-examples}
+
+Count-based validation only:
+
+```python
+>>> import pandas as pd
+>>> df = pd.DataFrame({
+...     "city": ["Vancouver", "Toronto", "Calgary", "Winnipeg"],
+...     "name": ["John Smith", "Bron Crift", "Pylon Gift", "Akon Sarmist"],
+...     "gender": ["M", "F", "F", "M"],
+...     "age": [25, 32, 41, 29]
+... })
+>>> col_types(
+...     dataframe=df,
+...     integer_cols=1,
+...     text_cols=3
+... )
+'All column categories present in the expected numbers.
+Check complete!'
+```
+
+Column-specific validation using logical type strings:
+
+```python
+>>> col_types(
+...     dataframe=df,
+...     column_schema={
+...         "age": "integer",
+...         "city": "text",
+...         "name": "text"
+...     }
+... )
+'All specified columns match their expected types. Check complete!'
+```
+
+Combined count-based and column-specific validation:
+
+```python
+>>> col_types(
+...     dataframe=df,
+...     integer_cols=1,
+...     text_cols=3,
+...     column_schema={
+...         "age": "integer"
+...     }
+... )
+'All column categories and specified columns are valid. Check complete!'
+```

@@ -1,0 +1,58 @@
+# outlier_validation.outliers_validate { #dsci_524_group_30_data_validation.outlier_validation.outliers_validate }
+
+```python
+outlier_validation.outliers_validate(
+    dataframe,
+    *,
+    col,
+    lower_bound,
+    upper_bound,
+    threshold,
+)
+```
+
+ Validates that a DataFrame column contains an acceptable proportion
+ of values outside a user-defined range.
+
+ This function performs validation checks to ensure that the proportion
+of non-missing values in the specified column that fall outside the given lower
+ and upper bounds does not exceed the specified threshold.
+ Keyword arguments are required.
+
+ Outliers are defined as values strictly less than `lower_bound` or strictly
+ greater than `upper_bound`. Values equal to the bounds are not considered
+ outliers. Missing values (NaN) are ignored when calculating the outlier
+ proportion.
+
+##  Parameters {.doc-section .doc-section--parameters}
+
+ dataframe : pd.DataFrame
+     The DataFrame containing the data to validate.
+
+ col : str
+     The column in which outliers will be identified.
+
+ lower_bound : float
+     The lower bound of the acceptable value range.
+
+ upper_bound : float
+     The upper bound of the acceptable value range.
+
+ threshold : float
+     The maximum acceptable proportion of outliers (between 0 and 1).
+
+##  Returns {.doc-section .doc-section--returns}
+
+ str
+     Message which either confirms that the proportion of outliers is
+     within the acceptable threshold, or reports that the threshold
+     has been exceeded.
+
+##  Raises {.doc-section .doc-section--raises}
+
+ TypeError
+     If `dataframe` is not a pandas DataFrame.
+ ValueError
+     If `col` is not in the DataFrame, if `lower_bound` is not less than
+     `upper_bound`, if `threshold` is not between 0 and 1, or if the column
+     contains no non-missing values.

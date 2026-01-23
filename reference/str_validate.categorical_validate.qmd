@@ -1,0 +1,70 @@
+# str_validate.categorical_validate { #dsci_524_group_30_data_validation.str_validate.categorical_validate }
+
+```python
+str_validate.categorical_validate(
+    dataframe,
+    column,
+    num_cat,
+    case=None,
+    spaces=False,
+)
+```
+
+Validate categorical column properties in a pandas DataFrame.
+
+This function performs a series of validation checks on a specified
+categorical column. Checks include validating the number of unique 
+categories and enforcing consistent casing and formatting rules such 
+as title case, uppercase, lowercase, and presence of spaces.
+
+## Parameters {.doc-section .doc-section-parameters}
+
+| Name      | Type         | Description                                                                                                                                                                                                                                                                                                                                 | Default    |
+|-----------|--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|
+| dataframe | pd.DataFrame | The pandas DataFrame containing the categorical column.                                                                                                                                                                                                                                                                                     | _required_ |
+| column    | str          | Name of the column to validate.                                                                                                                                                                                                                                                                                                             | _required_ |
+| num_cat   | int          | Expected number of unique categories in the column, excluding  missing values (NaN, None, etc.).                                                                                                                                                                                                                                            | _required_ |
+| case      | str          | Expected case format for all categories. Valid options are: - "upper" : All categories should be uppercase - "lower" : All categories should be lowercase - "title" : All categories should be in title case (first letter    of each word capitalized, as determined by str.istitle()) If None (default), no case validation is performed. | `None`     |
+| spaces    | bool         | If True, checks whether all categories contain at least one space.                                                                                                                                                                                                                                                                          | `False`    |
+
+## Returns {.doc-section .doc-section-returns}
+
+| Name   | Type   | Description                                                                                                                                                                                                                                           |
+|--------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|        | str    | A confirmation message 'Checks completed!' indicating that all  validation checks have been executed. This message is returned  regardless of whether validations passed or failed. Individual  check results are printed to stdout during execution. |
+
+## Raises {.doc-section .doc-section-raises}
+
+| Name   | Type       | Description                                                                                           |
+|--------|------------|-------------------------------------------------------------------------------------------------------|
+|        | KeyError   | If the specified column does not exist in the dataframe.                                              |
+|        | ValueError | If num_cat is negative or if case is not one of the valid options  ("upper", "lower", "title", None). |
+|        | TypeError  | If the column does not contain string/categorical data.                                               |
+
+## Notes {.doc-section .doc-section-notes}
+
+- Missing values are removed prior to all validation checks.
+- Case validation is only performed if the case parameter is specified.
+- Validation results are reported via printed messages rather than
+  raised exceptions.
+
+## Examples {.doc-section .doc-section-examples}
+
+```python
+>>> import pandas as pd
+>>> df = pd.DataFrame({
+...     "city": ["Vancouver", "Toronto", "Calgary", None],
+...     "gender": ["M", "F", "F", "M"],
+...     "age": [25, 32, 41, 29]
+... })
+>>> categorical_validate(
+...     dataframe=df,
+...     column="city",
+...     num_cat=3,
+...     case="title",
+...     spaces=False
+... )
+Expected and actual number of categories are equal
+All categories are in title case
+'Checks completed!'
+```
