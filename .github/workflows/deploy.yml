@@ -2,8 +2,8 @@ name: deploy-test-pypi
 
 on:
   push:
-  pull_request:
-    branches: [main]
+    tags:
+      - 'v*' # only deploy with tag
   
   workflow_dispatch:
 
