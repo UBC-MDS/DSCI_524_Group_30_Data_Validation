@@ -1,0 +1,12 @@
+# Function reference {.doc .doc-index}
+
+## Validation Functions
+
+Functions for validating dataset columns.
+
+| | |
+| --- | --- |
+| [col_types_validate.col_types_validate](col_types_validate.col_types_validate.qmd#dsci_524_group_30_data_validation.col_types_validate.col_types_validate) | Validates that a DataFrame contains the expected number of each |
+| [missing_values_validate.missing_values_validate](missing_values_validate.missing_values_validate.qmd#dsci_524_group_30_data_validation.missing_values_validate.missing_values_validate) | Validate the amount of missing values in a pandas DataFrame. |
+| [outlier_validation.outliers_validate](outlier_validation.outliers_validate.qmd#dsci_524_group_30_data_validation.outlier_validation.outliers_validate) |  Validates that a DataFrame column contains an acceptable proportion |
+| [str_validate.categorical_validate](str_validate.categorical_validate.qmd#dsci_524_group_30_data_validation.str_validate.categorical_validate) | Validate categorical column properties in a pandas DataFrame. |
