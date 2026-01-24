@@ -2,7 +2,7 @@
 
 |        |        |
 |--------|--------|
-| Package | [![Latest TestPyPI Version](https://img.shields.io/badge/dynamic/json?color=blue&label=testpypi&query=%24.info.version&url=https%3A%2F%2Ftest.pypi.org%2Fpypi%2FDSCI_524_Group_30_Data_Validation%2Fjson)](https://test.pypi.org/project/DSCI_524_Group_30_Data_Validation/) [![Supported Python Versions](https://img.shields.io/badge/python-3.x-blue.svg)](https://test.pypi.org/project/DSCI_524_Group_30_Data_Validation/)  |
+| Package | [![Latest TestPyPI Version](https://img.shields.io/badge/dynamic/json?color=blue&label=testpypi&query=%24.info.version&url=https%3A%2F%2Ftest.pypi.org%2Fpypi%2FDSCI_524_Group_30_Data_Validation%2Fjson)](https://test.pypi.org/project/DSCI_524_Group_30_Data_Validation/) [![Supported Python Versions](https://img.shields.io/badge/python-3.10-blue.svg)](https://test.pypi.org/project/DSCI_524_Group_30_Data_Validation/)  |
 | Meta   | [![Code of Conduct](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md) |
 
 ## Summary
