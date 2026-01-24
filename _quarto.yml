@@ -1,0 +1,29 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "DSCI 524 Group 30 Data Validation"
+  navbar:
+    left:
+      - text: "Home"
+        href: index.qmd
+      - text: "Reference"
+        href: reference/index.qmd
+
+format:
+  html:
+    theme: lux
+    toc: true
+
+quartodoc:
+  package: dsci_524_group_30_data_validation
+  dir: reference
+  sections:
+    - title: Validation Functions
+      desc: Functions for validating dataset columns.
+      contents:
+        - col_types_validate.col_types_validate
+        - missing_values_validate.missing_values_validate
+        - outlier_validation.outliers_validate
+        - str_validate.categorical_validate

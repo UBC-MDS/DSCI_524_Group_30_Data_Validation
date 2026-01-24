@@ -62,13 +62,23 @@ pytest -v
 
 ## Build Documentation
 
+### Option 1 (Recommended): Build using Hatch
+
+This option installs all required documentation dependencies automatically and builds the documentation:
+
+```bash
+hatch run docs:build
+```
+### Option 2 (Optional): Live preview locally (requires Quarto installed)
+
+If you have Quarto installed locally, you can generate the API reference pages and preview the documentation website:
+
 ```bash
 quartodoc build --watch
-
 quarto preview
 ```
 
-Documentation deployment is automated.
+Documentation deployment is automated through GitHub Actions.
 
 ## Example Use
 

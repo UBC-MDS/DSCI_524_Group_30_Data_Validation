@@ -1,0 +1,9 @@
+---
+title: "Home"
+---
+
+# API Reference
+
+Go to the API reference page here:
+
+[API Reference](reference/index.qmd)
