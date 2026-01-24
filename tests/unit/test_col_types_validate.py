@@ -319,3 +319,51 @@ def test_schema_with_python_bool_type_fail(sample_df):
     )
     assert isinstance(result, str)
     assert "Column 'age' expected type 'boolean'" in result
+
+
+# last 4 tests, included as a part of milestone 4
+
+
+def test_report_false(sample_df):
+    """Test that if report empty, and schema not used, return message is correct"""
+    result = col_types_validate(dataframe=sample_df, numeric_cols=1)
+    assert isinstance(result, str)
+    assert "column categories are present" in result
+
+
+def test_schema_only(sample_df):
+    """Test that if only schema used, return message is correct"""
+    result = col_types_validate(dataframe=sample_df, column_schema={"name": "text"})
+    assert isinstance(result, str)
+    assert "specified columns match their expected types" in result
+
+
+def test_schema_datetime_type_pass():
+    """Test schema validation with 'datetime' type on a datetime column."""
+    df_with_datetime = pd.DataFrame(
+        {
+            "event_date": pd.to_datetime(["2024-01-01", "2024-01-02", "2024-01-03"]),
+            "event_name": ["Event A", "Event B", "Event C"],
+        }
+    )
+    result = col_types_validate(
+        dataframe=df_with_datetime, column_schema={"event_date": "datetime"}
+    )
+    assert isinstance(result, str)
+    assert "Check complete" in result
+
+
+def test_count_based_validation_multiple_type_failures(sample_df):
+    """Test that count-based validation reports multiple type count mismatches"""
+    result = col_types_validate(
+        dataframe=sample_df,
+        integer_cols=2,
+        text_cols=2,
+        boolean_cols=1,
+    )
+    assert isinstance(result, str)
+    # All three mismatches should be reported
+    assert "integer" in result.lower()
+    assert "text" in result.lower()
+    assert "boolean" in result.lower()
+    assert result.count("Expected") == 3
