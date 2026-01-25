@@ -13,7 +13,7 @@ informative, and concise output from running each function, designed to help to 
 ### Functions Included
 
 1. Column Validation Function: Validates that a DataFrame contains the expected number of each given logical column category.
-2. Missing Values Threshold Function: This function checks whether the given column in the pandas dataframe has missing values at or below the given threshold.
+2. Missing Values Threshold Function: This function checks whether the given column in the pandas dataframe has missing values over the given threshold or not.
 3. Values Outlier Function: Validates that a DataFrame column contains an acceptable proportion of values outside a user-defined range.
 4. Categorical Column Function: Validate categorical column properties in a pandas DataFrame.
 
@@ -22,6 +22,10 @@ The project looks to re-imagine some of the functions of [Pandera](https://pande
 ## Setting up the Development Environment
 
 1. To get started, clone the repository to your local device.
+
+```bash
+git clone https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation.git
+```
 
 2. Change directory into the repository
 
