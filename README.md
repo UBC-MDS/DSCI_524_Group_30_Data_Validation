@@ -43,7 +43,7 @@ conda activate project-env
 
 You should now see (project-env) in your terminal prompt.
 
-5. Make sure you have quarto installed. You can install from here:
+5. Make sure you have quarto installed for viewing the documentation site. You can install from here:
 
 <https://quarto.org/docs/get-started/>
 
@@ -66,24 +66,15 @@ pytest -v
 -v results in a more verbose output, showing the names of all tests and if they pass or not.
 
 ## Build Documentation
-
-### Option 1 (Recommended): Build using Hatch
-
-This option installs all required documentation dependencies automatically and builds the documentation:
-
-```bash
-hatch run docs:build
-```
-### Option 2 (Optional): Live preview locally (requires Quarto installed)
+### Live preview locally (requires Quarto installed)
 
 If you have Quarto installed locally, you can generate the API reference pages and preview the documentation website:
 
 ```bash
-quartodoc build --watch
 quarto preview
 ```
 
-Documentation deployment is automated through GitHub Actions.
+Documentation building / deployment is automated through GitHub Actions.
 
 ## Example Use
 
