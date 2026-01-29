@@ -9,7 +9,9 @@ website:
       - text: "Home"
         href: index.qmd
       - text: "Reference"
-        href: reference/index.qmd
+        href: reference/index.qmd 
+      - text: "Development Tools and Practices"
+        href: reference/development.qmd
 
 format:
   html:
