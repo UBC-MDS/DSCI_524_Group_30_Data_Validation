@@ -15,7 +15,7 @@ You can contribute in many ways, for example:
 
 ### Report Bugs
 
-Report bugs at https://github.com//dsci_524_group_30_data_validation/issues.
+Report bugs at <https://github.com//dsci_524_group_30_data_validation/issues>.
 
 **If you are reporting a bug, please follow the template guidelines. The more
 detailed your report, the easier and thus faster we can help you.**
@@ -48,16 +48,16 @@ to let us know what you will be working on so that we can provide you with guida
 ### Submit Feedback
 
 The best way to send feedback is to file an issue at
-https://github.com//dsci_524_group_30_data_validation/issues. If your feedback fits the format of one of
+<https://github.com//dsci_524_group_30_data_validation/issues>. If your feedback fits the format of one of
 the issue templates, please use that. Remember that this is a volunteer-driven
 project and everybody has limited time.
 
-## Get Started!
+## Get Started
 
 Ready to contribute? Here's how to set up DSCI_524_Group_30_Data_Validation for
 local development.
 
-1. Fork the https://github.com//dsci_524_group_30_data_validation
+1. Fork the <https://github.com//dsci_524_group_30_data_validation>
    repository on GitHub.
 2. Clone your fork locally (*if you want to work locally*)
 
@@ -104,3 +104,20 @@ Before you submit a pull request, check that it meets these guidelines:
    new functionality into a function with a docstring.
 3. Your pull request will automatically be checked by the full test suite.
    It needs to pass all of them before it can be considered for merging.
+
+### Development tools, GitHub infrastructure, and organizational practices
+
+In this course, and throughout development of this project, we have utilized many new tools, and learned many new practices related to github infrastructure, collaboration, and package development. Below, we discuss some of the practices and tools we learned that we will bring forward into future projects, or if we choose to scale this project up.
+
+Some of our favorites as a group were:
+
+* deploying documentation using quartodoc on Github Pages - ended up being a simple, constantly updating, and aesthetic way to show our function documentation. Additionally, the fact that building locally was possible was a huge help when creating the quartodoc website, as we could preview changes without needing to push.
+* GitHub actions workflow for continuous integration - allowed us to continually run the test suite and style checkers on pushes and pull requests to your project’s repository’s main branch (our deployment branch, in this case). Although this presented a cost up front in terms of workload, it later helped us to keep everything running smoothly.
+* Iteratively programming using LLMs, as documented in issues related to Milestone 2 - when creating tests got repetitive, when it was difficult to find where there wasn't enough branch coverage, or when code just did not want to run, working with an LLM could be very helpful. We compared experiences with Claude compared to ChatGPT, and found that prompt engineering was absolutely make or break.
+
+If we were to scale up, we'd utilize these new tools, as well as some older classics:
+
+* Github Flow - absolutely essential for collaboration, reproducbility, and record-keeping.
+* Unit tests - illuminated a lot of potential problems in our functions, and helped to refine and improve functions.
+* Defensive programming - no explanation needed
+* Linking issues to pull requests to milestones to releases - this ended up being super useful for record-keeping and general wayfinding around the project.
