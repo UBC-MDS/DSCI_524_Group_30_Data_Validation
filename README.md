@@ -70,6 +70,13 @@ pytest -v
 -v results in a more verbose output, showing the names of all tests and if they pass or not.
 
 ## Build Documentation
+
+### Build Quartodoc Site
+Quartodoc is installed in the environment.yml file
+```bash
+quartodoc build --verbose
+```
+
 ### Live preview locally (requires Quarto installed)
 
 If you have Quarto installed locally, you can generate the API reference pages and preview the documentation website:
