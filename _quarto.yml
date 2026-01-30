@@ -1,13 +1,16 @@
 project:
   type: website
   output-dir: docs
+  render:
+    - README.md
+    - reference/index.qmd
 
 website:
   title: "DSCI 524 Group 30 Data Validation"
   navbar:
     left:
       - text: "Home"
-        href: index.qmd
+        href: README.md
       - text: "Reference"
         href: reference/index.qmd
 
