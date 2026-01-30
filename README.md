@@ -89,23 +89,145 @@ Documentation building / deployment is automated through GitHub Actions.
 
 ## Example Use
 
+### Column Validation Function (`col_types_validate`)
+Count-based validation only:
 ```python
-   >>> import pandas as pd
-    >>> df = pd.DataFrame({
-    ...     "city": ["Vancouver", "Toronto", "Calgary", None],
-    ...     "gender": ["M", "F", "F", "M"],
-    ...     "age": [25, 32, 41, 29]
-    ... })
-    >>> categorical_validate(
-    ...     dataframe=df,
-    ...     column="city",
-    ...     num_cat=3,
-    ...     case="title",
-    ...     spaces=False
-    ... )
-    Expected and actual number of categories are equal
-    All categories are in title case
-    'Checks completed!'
+import pandas as pd
+from dsci_524_group_30_data_validation.col_types_validate import col_types_validate
+df = pd.DataFrame({
+     "city": ["Vancouver", "Toronto", "Calgary", "Winnipeg"],
+     "name": ["John Smith", "Bron Crift", "Pylon Gift", "Akon Sarmist"],
+     "gender": ["M", "F", "F", "M"],
+     "age": [25, 32, 41, 29]
+     })
+col_types_validate(
+    dataframe=df,
+    integer_cols=1,
+    text_cols=3
+    )
+```
+Expected output:
+```python
+'All column categories present in the expected numbers.Check complete!'
+```
+
+Column-specific validation using logical type strings:
+```python
+col_types_validate(
+    dataframe=df,
+    column_schema={
+      "age": "integer",
+      "city": "text",
+      "name": "text"
+    }
+  )
+```
+Expected output:
+```python
+'All specified columns match their expected types. Check complete!'
+```
+
+Combined count-based and column-specific validation:
+```python
+col_types_validate(
+    dataframe=df,
+    integer_cols=1,
+    text_cols=3,
+    column_schema={
+      "age": "integer"
+    }
+  )
+```
+Expected output:
+```python
+'All column categories and specified columns are valid. Check complete!'
+```
+
+### Missing Values Threshold Function (`missing_values_validate`)
+Passed the threshold requirement example:
+```python
+import pandas as pd
+from dsci_524_group_30_data_validation.missing_values_validate import missing_values_validate
+data = pd.DataFrame({
+        "name": ["Alex", None, None, "Austin", None],
+        "age": [21, 43, 23, None, 38],
+        "sex": ["M", "F", "F", "M", "F"],
+        "married": [True, False, None, None, True]})
+missing_values_validate(df=data, col="age", threshold=0.25)
+```
+Expected output:
+```python
+The amount of missing values are valid. Checks completed!
+True
+```
+
+Not passing the threshold requirement example:
+```python
+missing_values_validate(df=data, col="name", threshold=0.05)
+```
+Expected output:
+```python
+Invalid check: the amount of missing values is 0.6, exceeding the threshold: 0.05. Checks completed!
+False
+```
+
+### Values Outlier Function (`outliers_validate`)
+Example where outlier proportion is within the threshold:
+```python
+import pandas as pd
+from dsci_524_group_30_data_validation.outlier_validation import outliers_validate
+df = pd.DataFrame({"age": [25, 32, 41, 29, 200]})
+outliers_validate(
+    dataframe=df,
+    col="age",
+    lower_bound=0,
+    upper_bound=100,
+    threshold=0.20
+    )
+```
+Expected output:
+```python
+'The proportion of outliers is within the acceptable threshold. Check complete!'
+```
+
+Example where outlier proportion exceeds the threshold:
+```python
+df = pd.DataFrame({"score": [10, 12, 999, 11, 1000]})
+outliers_validate(
+    dataframe=df,
+    col="score",
+    lower_bound=0,
+    upper_bound=100,
+    threshold=0.10
+  )
+```
+Expected output:
+```python
+'The proportion of outliers exceeds the threshold 0.1. Check complete!'
+```
+
+### Categorical Column Function (`categorical_validate`)
+```python
+import pandas as pd
+from dsci_524_group_30_data_validation.str_validate import categorical_validate
+df = pd.DataFrame({
+     "city": ["Vancouver", "Toronto", "Calgary", None],
+     "gender": ["M", "F", "F", "M"],
+     "age": [25, 32, 41, 29]
+     })
+categorical_validate(
+    dataframe=df,
+    column="city",
+    num_cat=3,
+    case="title",
+    spaces=False
+    )
+```
+Expected output:
+```python
+Expected and actual number of categories are equal
+All categories are in title case
+'Checks completed!'
 ```
 
 ## Github Actions Badges
