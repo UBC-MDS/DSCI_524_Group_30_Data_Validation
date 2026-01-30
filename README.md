@@ -101,6 +101,20 @@ Documentation building / deployment is automated through GitHub Actions.
     'Checks completed!'
 ```
 
+## Github Actions Badges
+
+[![Build Docs](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/docs.yml/badge.svg)](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/docs.yml)
+
+[![ci](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/build.yml/badge.svg)](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/build.yml)
+
+[![Dependabot Updates](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/dependabot/dependabot-updates)
+
+[![deploy-test-pypi](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/deploy.yml/badge.svg)](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/deploy.yml)
+
+[![pages-build-deployment](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/pages/pages-build-deployment)
+
+[![Publish Docs](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/publish-docs.yml/badge.svg)](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/publish-docs.yml)
+
 ## Contributors
 
 Daniel Yorke, Cynthia Agata Limantono, Shrijaa Venkatasubramanian Subashini, and Wendy Frankel
