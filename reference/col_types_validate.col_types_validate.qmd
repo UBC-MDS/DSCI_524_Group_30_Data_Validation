@@ -74,7 +74,7 @@ Count-based validation only:
 ...     "gender": ["M", "F", "F", "M"],
 ...     "age": [25, 32, 41, 29]
 ... })
->>> col_types(
+>>> col_types_validate(
 ...     dataframe=df,
 ...     integer_cols=1,
 ...     text_cols=3
@@ -86,7 +86,7 @@ Check complete!'
 Column-specific validation using logical type strings:
 
 ```python
->>> col_types(
+>>> col_types_validate(
 ...     dataframe=df,
 ...     column_schema={
 ...         "age": "integer",
@@ -100,7 +100,7 @@ Column-specific validation using logical type strings:
 Combined count-based and column-specific validation:
 
 ```python
->>> col_types(
+>>> col_types_validate(
 ...     dataframe=df,
 ...     integer_cols=1,
 ...     text_cols=3,

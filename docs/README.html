@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>changelog – DSCI 524 Group 30 Data Validation</title>
+<title>readme – DSCI 524 Group 30 Data Validation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -92,7 +127,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link active" href="./README.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
@@ -115,10 +150,22 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#changelog" id="toc-changelog" class="nav-link active" data-scroll-target="#changelog">Changelog</a>
+  <li><a href="#welcome-to-dsci_524_group_30_data_validation" id="toc-welcome-to-dsci_524_group_30_data_validation" class="nav-link active" data-scroll-target="#welcome-to-dsci_524_group_30_data_validation">Welcome to DSCI_524_Group_30_Data_Validation</a>
   <ul class="collapse">
-  <li><a href="#unreleased" id="toc-unreleased" class="nav-link" data-scroll-target="#unreleased">[Unreleased]</a></li>
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section">[0.1.0] - (1979-01-01)</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a>
+  <ul class="collapse">
+  <li><a href="#functions-included" id="toc-functions-included" class="nav-link" data-scroll-target="#functions-included">Functions Included</a></li>
+  </ul></li>
+  <li><a href="#setting-up-the-development-environment" id="toc-setting-up-the-development-environment" class="nav-link" data-scroll-target="#setting-up-the-development-environment">Setting up the Development Environment</a></li>
+  <li><a href="#installing-the-package" id="toc-installing-the-package" class="nav-link" data-scroll-target="#installing-the-package">Installing the Package</a></li>
+  <li><a href="#running-tests" id="toc-running-tests" class="nav-link" data-scroll-target="#running-tests">Running Tests</a></li>
+  <li><a href="#build-documentation" id="toc-build-documentation" class="nav-link" data-scroll-target="#build-documentation">Build Documentation</a>
+  <ul class="collapse">
+  <li><a href="#live-preview-locally-requires-quarto-installed" id="toc-live-preview-locally-requires-quarto-installed" class="nav-link" data-scroll-target="#live-preview-locally-requires-quarto-installed">Live preview locally (requires Quarto installed)</a></li>
+  </ul></li>
+  <li><a href="#example-use" id="toc-example-use" class="nav-link" data-scroll-target="#example-use">Example Use</a></li>
+  <li><a href="#contributors" id="toc-contributors" class="nav-link" data-scroll-target="#contributors">Contributors</a></li>
+  <li><a href="#copyright" id="toc-copyright" class="nav-link" data-scroll-target="#copyright">Copyright</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -129,20 +176,106 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="changelog" class="level1">
-<h1>Changelog</h1>
-<p>All notable changes to this project will be documented in this file.</p>
-<p>The format is based on <a href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>, and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p>
-<section id="unreleased" class="level2">
-<h2 class="anchored" data-anchor-id="unreleased">[Unreleased]</h2>
-<ul>
-<li>Upcoming features and fixes</li>
-</ul>
+<section id="welcome-to-dsci_524_group_30_data_validation" class="level1">
+<h1>Welcome to DSCI_524_Group_30_Data_Validation</h1>
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td>Package</td>
+<td><a href="https://test.pypi.org/project/DSCI_524_Group_30_Data_Validation/"><img src="https://img.shields.io/badge/dynamic/json?color=blue&amp;label=testpypi&amp;query=%24.info.version&amp;url=https%3A%2F%2Ftest.pypi.org%2Fpypi%2FDSCI_524_Group_30_Data_Validation%2Fjson" class="img-fluid" alt="Latest TestPyPI Version"></a> <a href="https://test.pypi.org/project/DSCI_524_Group_30_Data_Validation/"><img src="https://img.shields.io/badge/python-3.10+-blue.svg" class="img-fluid" alt="Supported Python Versions"></a></td>
+</tr>
+<tr class="even">
+<td>Meta</td>
+<td><a href="CODE_OF_CONDUCT.md"><img src="https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg" class="img-fluid" alt="Code of Conduct"></a></td>
+</tr>
+</tbody>
+</table>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>This package is an open source project which performs common data validation checks on a Pandas dataframe. This package aims to provide clear, informative, and concise output from running each function, designed to help to user learn more about their data. Functions are flexible and a variety of arguments are included within each function, to ensure full adaptibilty for data validation with any Pandas dataframe. This is useful in any data science pipeline, providing reproducibility, full functionality, and effectiveness.</p>
+<section id="functions-included" class="level3">
+<h3 class="anchored" data-anchor-id="functions-included">Functions Included</h3>
+<ol type="1">
+<li>Column Validation Function: Validates that a DataFrame contains the expected number of each given logical column category.</li>
+<li>Missing Values Threshold Function: This function checks whether the given column in the pandas dataframe has missing values over the given threshold or not.</li>
+<li>Values Outlier Function: Validates that a DataFrame column contains an acceptable proportion of values outside a user-defined range.</li>
+<li>Categorical Column Function: Validate categorical column properties in a pandas DataFrame.</li>
+</ol>
+<p>The project looks to re-imagine some of the functions of <a href="https://pandera.readthedocs.io/en/stable/">Pandera</a> in a more user-friendly way. It aims mainly to improve output of the Panderas function, making it more informative and interpretable.</p>
 </section>
-<section id="section" class="level2">
-<h2 class="anchored" data-anchor-id="section">[0.1.0] - (1979-01-01)</h2>
+</section>
+<section id="setting-up-the-development-environment" class="level2">
+<h2 class="anchored" data-anchor-id="setting-up-the-development-environment">Setting up the Development Environment</h2>
+<ol type="1">
+<li>To get started, clone the repository to your local device.</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="2" type="1">
+<li>Change directory into the repository</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> DSCI_524_Group_30_Data_Validation</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="3" type="1">
+<li>Create the Conda environment from the lock file</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda-lock</span> install <span class="at">-n</span> project-env conda-lock.yml</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="4" type="1">
+<li>Activate the environment</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate project-env</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>You should now see (project-env) in your terminal prompt.</p>
+<ol start="5" type="1">
+<li>Make sure you have quarto installed for viewing the documentation site. You can install from here:</li>
+</ol>
+<p><a href="https://quarto.org/docs/get-started/" class="uri">https://quarto.org/docs/get-started/</a></p>
+</section>
+<section id="installing-the-package" class="level2">
+<h2 class="anchored" data-anchor-id="installing-the-package">Installing the Package</h2>
+<p>You can install this package from the local source into your preferred Python environment using pip:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-e</span> .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="running-tests" class="level2">
+<h2 class="anchored" data-anchor-id="running-tests">Running Tests</h2>
+<p>You can run tests which validate all functions in the package using pytest.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pytest</span> <span class="at">-v</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>-v results in a more verbose output, showing the names of all tests and if they pass or not.</p>
+</section>
+<section id="build-documentation" class="level2">
+<h2 class="anchored" data-anchor-id="build-documentation">Build Documentation</h2>
+<section id="live-preview-locally-requires-quarto-installed" class="level3">
+<h3 class="anchored" data-anchor-id="live-preview-locally-requires-quarto-installed">Live preview locally (requires Quarto installed)</h3>
+<p>If you have Quarto installed locally, you can generate the API reference pages and preview the documentation website:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> preview</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Documentation building / deployment is automated through GitHub Actions.</p>
+</section>
+</section>
+<section id="example-use" class="level2">
+<h2 class="anchored" data-anchor-id="example-use">Example Use</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>   <span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">&gt;&gt;&gt;</span> df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    ...     <span class="st">"city"</span>: [<span class="st">"Vancouver"</span>, <span class="st">"Toronto"</span>, <span class="st">"Calgary"</span>, <span class="va">None</span>],</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    ...     <span class="st">"gender"</span>: [<span class="st">"M"</span>, <span class="st">"F"</span>, <span class="st">"F"</span>, <span class="st">"M"</span>],</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    ...     <span class="st">"age"</span>: [<span class="dv">25</span>, <span class="dv">32</span>, <span class="dv">41</span>, <span class="dv">29</span>]</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    ... })</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">&gt;&gt;&gt;</span> categorical_validate(</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    ...     dataframe<span class="op">=</span>df,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    ...     column<span class="op">=</span><span class="st">"city"</span>,</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    ...     num_cat<span class="op">=</span><span class="dv">3</span>,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    ...     case<span class="op">=</span><span class="st">"title"</span>,</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    ...     spaces<span class="op">=</span><span class="va">False</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    ... )</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    Expected <span class="kw">and</span> actual number of categories are equal</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    All categories are <span class="kw">in</span> title case</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">'Checks completed!'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="contributors" class="level2">
+<h2 class="anchored" data-anchor-id="contributors">Contributors</h2>
+<p>Daniel Yorke, Cynthia Agata Limantono, Shrijaa Venkatasubramanian Subashini, and Wendy Frankel</p>
+</section>
+<section id="copyright" class="level2">
+<h2 class="anchored" data-anchor-id="copyright">Copyright</h2>
 <ul>
-<li>First release</li>
+<li>Copyright © 2026 Daniel Yorke, Cynthia Agata Limantono, Shrijaa Venkatasubramanian Subashini, and Wendy Frankel</li>
+<li>Free software distributed under the <a href="./LICENSE">MIT License</a>.</li>
 </ul>
 
 
