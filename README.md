@@ -108,9 +108,9 @@ Documentation building / deployment is automated through GitHub Actions.
     'Checks completed!'
 ```
 
-## Continious Integration / GitHub Badges
+## Continuous Integration / GitHub Badges
 
-[![codecov](https://codecov.io/gh/UBC-MDS/DSCI_524_Group_30_Data_Validation/graph/badge.svg?token=sT0UlVC1nn)](https://codecov.io/gh/UBC-MDS/DSCI_524_Group_30_Data_Validation)
+[![codecov](https://codecov.io/gh/UBC-MDS/DSCI_524_Group_30_Data_Validation/branch/workflow-uodates/graph/badge.svg?token=sT0UlVC1nn)](https://codecov.io/gh/UBC-MDS/DSCI_524_Group_30_Data_Validation)
 
 ### Workflows
 
