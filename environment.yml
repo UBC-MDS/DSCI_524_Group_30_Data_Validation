@@ -10,8 +10,9 @@ dependencies:
   - copier
   - pandas
   - pip
+  - pip:
+      - quartodoc
   - altair
   - pytest
   - pytest-cov
   - faker
-prefix: C:\Users\jjyor\miniforge3\envs\dsci-524-proj-env
