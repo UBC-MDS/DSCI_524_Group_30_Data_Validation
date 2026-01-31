@@ -230,7 +230,11 @@ All categories are in title case
 'Checks completed!'
 ```
 
-## Github Actions Badges
+## Continuous Integration / GitHub Badges
+
+[![codecov](https://codecov.io/gh/UBC-MDS/DSCI_524_Group_30_Data_Validation/branch/main/graph/badge.svg?token=sT0UlVC1nn)](https://codecov.io/gh/UBC-MDS/DSCI_524_Group_30_Data_Validation)
+
+### Workflows
 
 [![Build Docs](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/docs.yml/badge.svg)](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/docs.yml)
 
