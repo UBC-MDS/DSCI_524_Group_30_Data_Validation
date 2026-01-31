@@ -110,7 +110,7 @@ Documentation building / deployment is automated through GitHub Actions.
 
 ## Continuous Integration / GitHub Badges
 
-[![codecov](https://codecov.io/gh/UBC-MDS/DSCI_524_Group_30_Data_Validation/branch/workflow-uodates/graph/badge.svg?token=sT0UlVC1nn)](https://codecov.io/gh/UBC-MDS/DSCI_524_Group_30_Data_Validation)
+[![codecov](https://codecov.io/gh/UBC-MDS/DSCI_524_Group_30_Data_Validation/branch/main/graph/badge.svg?token=sT0UlVC1nn)](https://codecov.io/gh/UBC-MDS/DSCI_524_Group_30_Data_Validation)
 
 ### Workflows
 
