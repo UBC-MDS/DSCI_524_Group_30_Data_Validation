@@ -3,17 +3,18 @@
 ################################################################################
 
 [build-system]
+requires = ["hatchling", "hatch-vcs"]
 build-backend = "hatchling.build"
-requires = ["hatchling"]
+
 
 ################################################################################
 # Project Configuration
 ################################################################################
 
 [project]
-name = "dsci_524_group_30_data_validation"
-# You can chose to use dynamic versioning with hatch or static where you add it manually.
-version = "0.1.1"
+name = "dsci_524_group_30_data_validation"  # note your package name
+# version = "0.1.0"   # you do not need this anymore if you
+dynamic = ["version"]
 
 description = "DSCI 524 Group Project"
 authors = [
@@ -47,7 +48,8 @@ Download = "https://pypi.org/project/dsci_524_group_30_data_validation/#files"
 # They are here now because hatch hasn't released support for them but plans to
 # in Mid November 2025.
 dev = [
-    "hatch",
+    'hatch',
+    'hatch-vcs',
     "pre-commit",
     "ruff",
 ]
@@ -93,7 +95,9 @@ only-packages = true
 [tool.hatch.build.targets.wheel]
 packages = ["src/dsci_524_group_30_data_validation"]
 
-
+[tool.hatch.version]
+source = "vcs"
+raw-options = { version_scheme = "no-guess-dev", local_scheme = "no-local-version" }
 
 ######## Configure pytest for your test suite ########
 [tool.pytest.ini_options]
@@ -141,6 +145,9 @@ check = [
     "hatch build {args:--clean}",
     "twine check dist/*",
 ]
+
+[tool.hatch.build.hooks.vcs]
+version-file = "src/dsci_524_group_30_data_validation/__version__.py"
 
 #--------------- Run tests ---------------#
 [tool.hatch.envs.test]
