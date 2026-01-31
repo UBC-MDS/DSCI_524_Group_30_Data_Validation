@@ -1,18 +1,19 @@
 import pandas as pd
 
+
 def categorical_validate(
     dataframe: pd.DataFrame,
     column: str,
     num_cat: int,
     case: str = None,
-    spaces: bool = False
+    spaces: bool = False,
 ):
     """
     Validate categorical column properties in a pandas DataFrame.
 
     This function performs a series of validation checks on a specified
-    categorical column. Checks include validating the number of unique 
-    categories and enforcing consistent casing and formatting rules such 
+    categorical column. Checks include validating the number of unique
+    categories and enforcing consistent casing and formatting rules such
     as title case, uppercase, lowercase, and presence of spaces.
 
     Parameters
@@ -22,13 +23,13 @@ def categorical_validate(
     column : str
         Name of the column to validate.
     num_cat : int
-        Expected number of unique categories in the column, excluding 
+        Expected number of unique categories in the column, excluding
         missing values (NaN, None, etc.).
     case : str, optional
         Expected case format for all categories. Valid options are:
         - "upper" : All categories should be uppercase
         - "lower" : All categories should be lowercase
-        - "title" : All categories should be in title case (first letter 
+        - "title" : All categories should be in title case (first letter
           of each word capitalized, as determined by str.istitle())
         If None (default), no case validation is performed.
     spaces : bool, default=False
@@ -37,9 +38,9 @@ def categorical_validate(
     Returns
     -------
     str
-        A confirmation message 'Checks completed!' indicating that all 
-        validation checks have been executed. This message is returned 
-        regardless of whether validations passed or failed. Individual 
+        A confirmation message 'Checks completed!' indicating that all
+        validation checks have been executed. This message is returned
+        regardless of whether validations passed or failed. Individual
         check results are printed to stdout during execution.
 
     Raises
@@ -47,7 +48,7 @@ def categorical_validate(
     KeyError
         If the specified column does not exist in the dataframe.
     ValueError
-        If num_cat is negative or if case is not one of the valid options 
+        If num_cat is negative or if case is not one of the valid options
         ("upper", "lower", "title", None).
     TypeError
         If the column does not contain string/categorical data.
@@ -81,7 +82,7 @@ def categorical_validate(
     # Validate dataframe is pd.Dataframe
     if not isinstance(dataframe, pd.DataFrame):
         raise TypeError("dataframe must be a pd.DataFrame")
-    
+
     # Check if argument for column name is a string
     if not isinstance(column, str):
         raise TypeError("column name argument must be as a string")
@@ -89,28 +90,26 @@ def categorical_validate(
     # Check if column exists
     if column not in dataframe.columns:
         raise KeyError(f"Column '{column}' does not exist in dataframe.")
-        
+
     # Check that column dtype is str or catagorical
     col = dataframe[column]
     dtype = col.dtype
     if dtype.kind not in {"O", "U", "S"} and str(dtype) != "category":
         raise TypeError(
-            f"Column '{column}' must contain string or categorical data, "
-            f"not {dtype}"
+            f"Column '{column}' must contain string or categorical data, not {dtype}"
         )
-    
+
     # Validate case parameter
     valid_cases = ["upper", "lower", "title", None]
     if case not in valid_cases:
         raise ValueError(
-            f"Invalid case parameter: '{case}'. "
-            f"Must be one of {valid_cases}."
+            f"Invalid case parameter: '{case}'. Must be one of {valid_cases}."
         )
-    
+
     # Validate num_cat parameter
     if num_cat <= 0:
         raise ValueError("num_cat must be > 0.")
- 
+
     # Select column and drop NAs
     col = dataframe[column].dropna().astype(str)
 

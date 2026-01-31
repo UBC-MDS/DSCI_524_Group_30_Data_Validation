@@ -9,6 +9,7 @@ These tests cover key edge cases based on the function specification:
 - invalid case when outlier proportion exceeds threshold
 - invalid inputs (missing column, invalid threshold, invalid bounds, non-dataframe)
 """
+
 import pandas as pd
 import pytest
 
@@ -28,7 +29,10 @@ def test_outliers_validate_no_outliers_valid():
         upper_bound=65,
         threshold=0.0,
     )
-    assert result == "The proportion of outliers is within the acceptable threshold. Check complete!"
+    assert (
+        result
+        == "The proportion of outliers is within the acceptable threshold. Check complete!"
+    )
 
 
 def test_outliers_validate_outliers_equal_threshold_valid():
@@ -44,7 +48,10 @@ def test_outliers_validate_outliers_equal_threshold_valid():
         upper_bound=65,
         threshold=0.2,
     )
-    assert result == "The proportion of outliers is within the acceptable threshold. Check complete!"
+    assert (
+        result
+        == "The proportion of outliers is within the acceptable threshold. Check complete!"
+    )
 
 
 def test_outliers_validate_outliers_just_below_threshold_valid():
@@ -60,7 +67,10 @@ def test_outliers_validate_outliers_just_below_threshold_valid():
         upper_bound=65,
         threshold=0.2,
     )
-    assert result == "The proportion of outliers is within the acceptable threshold. Check complete!"
+    assert (
+        result
+        == "The proportion of outliers is within the acceptable threshold. Check complete!"
+    )
 
 
 def test_outliers_validate_outliers_just_above_threshold_invalid():
@@ -76,7 +86,10 @@ def test_outliers_validate_outliers_just_above_threshold_invalid():
         upper_bound=65,
         threshold=0.2,
     )
-    assert result == "The proportion of outliers exceeds the threshold 0.2. Check complete!"
+    assert (
+        result
+        == "The proportion of outliers exceeds the threshold 0.2. Check complete!"
+    )
 
 
 def test_outliers_validate_outliers_exceed_threshold_invalid():
@@ -92,7 +105,10 @@ def test_outliers_validate_outliers_exceed_threshold_invalid():
         upper_bound=65,
         threshold=0.2,
     )
-    assert result == "The proportion of outliers exceeds the threshold 0.2. Check complete!"
+    assert (
+        result
+        == "The proportion of outliers exceeds the threshold 0.2. Check complete!"
+    )
 
 
 def test_outliers_validate_missing_column_raises():
