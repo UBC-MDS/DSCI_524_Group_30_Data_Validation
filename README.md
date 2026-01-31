@@ -52,8 +52,13 @@ You should now see (project-env) in your terminal prompt.
 <https://quarto.org/docs/get-started/>
 
 ## Installing the Package
+Either install from Test-Pypi using the following:
 
-You can install this package from the local source into your preferred Python environment using pip:
+```bash
+pip install -i https://test.pypi.org/simple/ dsci-524-group-30-data-validation
+```
+
+Or you can install this package from the local source into your preferred Python environment using pip:
 
 ```bash
 pip install -e .
