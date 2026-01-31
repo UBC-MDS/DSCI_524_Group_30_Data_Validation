@@ -10,6 +10,7 @@ on:
 
 jobs:
   build:
+    needs: ruff # run ruff checks first before building
     runs-on: ${{ matrix.os }} 
 
     strategy:
@@ -19,10 +20,10 @@ jobs:
 
     steps:
       - name: Check-out repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
 
@@ -39,3 +40,11 @@ jobs:
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV }}
+  ruff:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+      - run: pip install ruff
+      - run: ruff check .
+      - run: ruff format --check .  # Verify formatting without changing files
