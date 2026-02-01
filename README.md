@@ -11,11 +11,12 @@ This package is an open source project which performs common data validation che
 informative, and concise output from running each function, designed to help to user learn more about their data. Functions are flexible and a variety of arguments are included within each function, to ensure full adaptibilty for data validation with any Pandas dataframe. This is useful in any data science pipeline, providing reproducibility, full functionality, and effectiveness.
 
 ### Functions Included
-
-1. Column Validation Function: Validates that a DataFrame contains the expected number of each given logical column category.
-2. Missing Values Threshold Function: This function checks whether the given column in the pandas dataframe has missing values over the given threshold or not.
-3. Values Outlier Function: Validates that a DataFrame column contains an acceptable proportion of values outside a user-defined range.
-4. Categorical Column Function: Validate categorical column properties in a pandas DataFrame.
+| Function | Inputs | Outputs | Description |
+|----------|--------|---------|-------------|
+| `col_types_validate` | `dataframe: pd.DataFrame`<br>`numeric_cols: int`(default: `0`)<br>`integer_cols: int`(default: `0`)<br>`float_cols: int`(default: `0`)<br>`boolean_cols: int`(default: `0`)<br>`categorical_cols: int`(default: `0`)<br>`text_cols: int`(default: `0`)<br>`datetime_cols: int`(default: `0`)<br>`allow_extra_cols: bool`(default: `False`)<br>`column_schema: dict[str, str or type]`(optional) | `str` | Validates that a DataFrame contains the expected number of each given logical column category. |
+| `missing_values_validate` | `df: pd.DataFrame`<br>`col: str`<br>`threshold: float or int` | `bool` | Checks whether the given column in the pandas dataframe has missing values over the given threshold (0-1) or not.|
+| `outliers_validate` | `dataframe: pd.DataFrame`<br>`col: str`<br>`lower_bound: float`<br>`upper_bound: float`<br>`threshold: float` | `str` | Validates that a DataFrame column contains an acceptable proportion of values outside a user-defined range. |
+| `categorical_validate` | `dataframe: pd.DataFrame`<br>`column: str`<br>`num_cat: int`<br>`case: str`(optional, default: `None`)<br>`spaces: bool = False`(default: `False`) | `str` | Validate categorical column properties in a pandas DataFrame. |
 
 The project looks to re-imagine some of the functions of [Pandera](https://pandera.readthedocs.io/en/stable/) in a more user-friendly way. It aims mainly to improve output of the Panderas function, making it more informative and interpretable.
 
