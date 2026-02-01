@@ -112,7 +112,7 @@ def col_types_validate(
 
     Column-specific validation using logical type strings:
 
-    >>> col_types(
+    >>> col_types_validate(
     ...     dataframe=df,
     ...     column_schema={
     ...         "age": "integer",
@@ -124,7 +124,7 @@ def col_types_validate(
 
     Combined count-based and column-specific validation:
 
-    >>> col_types(
+    >>> col_types_validate(
     ...     dataframe=df,
     ...     integer_cols=1,
     ...     text_cols=3,
