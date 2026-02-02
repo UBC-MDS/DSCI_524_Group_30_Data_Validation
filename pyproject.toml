@@ -97,7 +97,6 @@ packages = ["src/dsci_524_group_30_data_validation"]
 
 [tool.hatch.version]
 source = "vcs"
-raw-options = { version_scheme = "release-branch-semver" }
 
 ######## Configure pytest for your test suite ########
 [tool.pytest.ini_options]
