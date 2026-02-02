@@ -269,7 +269,8 @@ def test_column_schema_none_branch(sample_df):
 def test_schema_with_unsupported_type_object(sample_df):
     """Test schema validation with an unsupported Python type object."""
     result = col_types_validate(
-        dataframe=sample_df, column_schema={"age": list}  # Unsupported type
+        dataframe=sample_df,
+        column_schema={"age": list},  # Unsupported type
     )
     assert isinstance(result, str)
     assert "unsupported" in result.lower() or "warning" in result.lower()
@@ -315,7 +316,8 @@ def test_schema_categorical_type_fail(sample_df):
 def test_schema_with_python_bool_type_fail(sample_df):
     """Test schema validation with Python bool type object fails on non-bool column."""
     result = col_types_validate(
-        dataframe=sample_df, column_schema={"age": bool}  # age is int, expecting bool
+        dataframe=sample_df,
+        column_schema={"age": bool},  # age is int, expecting bool
     )
     assert isinstance(result, str)
     assert "Column 'age' expected type 'boolean'" in result

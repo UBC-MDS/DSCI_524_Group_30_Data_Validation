@@ -126,4 +126,6 @@ def outliers_validate(
     if outlier_proportion <= threshold:
         return "The proportion of outliers is within the acceptable threshold. Check complete!"
 
-    return f"The proportion of outliers exceeds the threshold {threshold}. Check complete!"
+    return (
+        f"The proportion of outliers exceeds the threshold {threshold}. Check complete!"
+    )
