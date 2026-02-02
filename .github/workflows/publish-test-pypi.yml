@@ -16,6 +16,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Important: need full history for version detection
+          fetch-tags: true # debugging
 
       - name: Set up Python
         uses: actions/setup-python@v4
