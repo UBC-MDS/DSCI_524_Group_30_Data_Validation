@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>index – DSCI 524 Group 30 Data Validation</title>
+<title>outlier_validation.outliers_validate – DSCI 524 Group 30 Data Validation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -94,7 +129,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../reference/index.html" aria-current="page"> 
+    <a class="nav-link" href="../reference/index.html"> 
 <span class="menu-text">Reference</span></a>
   </li>  
   <li class="nav-item">
@@ -117,9 +152,13 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#function-reference" id="toc-function-reference" class="nav-link active" data-scroll-target="#function-reference">Function reference</a>
+  <li><a href="#dsci_524_group_30_data_validation.outlier_validation.outliers_validate" id="toc-dsci_524_group_30_data_validation.outlier_validation.outliers_validate" class="nav-link active" data-scroll-target="#dsci_524_group_30_data_validation.outlier_validation.outliers_validate">outlier_validation.outliers_validate</a>
   <ul class="collapse">
-  <li><a href="#validation-functions" id="toc-validation-functions" class="nav-link" data-scroll-target="#validation-functions">Validation Functions</a></li>
+  <li><a href="#parameters" id="toc-parameters" class="nav-link" data-scroll-target="#parameters">Parameters</a></li>
+  <li><a href="#returns" id="toc-returns" class="nav-link" data-scroll-target="#returns">Returns</a></li>
+  <li><a href="#raises" id="toc-raises" class="nav-link" data-scroll-target="#raises">Raises</a></li>
+  <li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes">Notes</a></li>
+  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Examples</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -130,31 +169,155 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="function-reference" class="level1 doc doc-index">
-<h1 class="doc doc-index">Function reference</h1>
-<section id="validation-functions" class="level2">
-<h2 class="anchored" data-anchor-id="validation-functions">Validation Functions</h2>
-<p>Functions for validating dataset columns.</p>
+<section id="dsci_524_group_30_data_validation.outlier_validation.outliers_validate" class="level1">
+<h1>outlier_validation.outliers_validate</h1>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>outlier_validation.outliers_validate(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    dataframe,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">*</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    col,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    lower_bound,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    upper_bound,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    threshold,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Validates that a DataFrame column contains an acceptable proportion of values outside a user-defined range.</p>
+<p>This function checks whether the proportion of non-missing values in the specified column that fall outside the interval [<code>lower_bound</code>, <code>upper_bound</code>] is less than or equal to the given <code>threshold</code>.</p>
+<p>Outliers are defined as values strictly less than <code>lower_bound</code> or strictly greater than <code>upper_bound</code>. Values equal to the bounds are not considered outliers. Missing values (NaN) are ignored when calculating the outlier proportion.</p>
+<p>All arguments except <code>dataframe</code> are keyword-only.</p>
+<section id="parameters" class="level2 doc-section doc-section-parameters">
+<h2 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters">Parameters</h2>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 13%">
+<col style="width: 62%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
-<td><a href="../reference/col_types_validate.col_types_validate.html#dsci_524_group_30_data_validation.col_types_validate.col_types_validate">col_types_validate.col_types_validate</a></td>
-<td>Validates that a DataFrame contains the expected number of each</td>
+<td>dataframe</td>
+<td>pd.DataFrame</td>
+<td>The DataFrame containing the data to validate.</td>
+<td><em>required</em></td>
 </tr>
 <tr class="even">
-<td><a href="../reference/missing_values_validate.missing_values_validate.html#dsci_524_group_30_data_validation.missing_values_validate.missing_values_validate">missing_values_validate.missing_values_validate</a></td>
-<td>Validate the amount of missing values in a pandas DataFrame.</td>
+<td>col</td>
+<td>str</td>
+<td>Name of the column in which outliers will be identified.</td>
+<td><em>required</em></td>
 </tr>
 <tr class="odd">
-<td><a href="../reference/outlier_validation.outliers_validate.html#dsci_524_group_30_data_validation.outlier_validation.outliers_validate">outlier_validation.outliers_validate</a></td>
-<td>Validates that a DataFrame column contains an acceptable proportion</td>
+<td>lower_bound</td>
+<td>float</td>
+<td>The lower bound of the acceptable value range.</td>
+<td><em>required</em></td>
 </tr>
 <tr class="even">
-<td><a href="../reference/str_validate.categorical_validate.html#dsci_524_group_30_data_validation.str_validate.categorical_validate">str_validate.categorical_validate</a></td>
-<td>Validate categorical column properties in a pandas DataFrame.</td>
+<td>upper_bound</td>
+<td>float</td>
+<td>The upper bound of the acceptable value range.</td>
+<td><em>required</em></td>
+</tr>
+<tr class="odd">
+<td>threshold</td>
+<td>float</td>
+<td>The maximum acceptable proportion of outliers (between 0 and 1).</td>
+<td><em>required</em></td>
 </tr>
 </tbody>
 </table>
+</section>
+<section id="returns" class="level2 doc-section doc-section-returns">
+<h2 class="doc-section doc-section-returns anchored" data-anchor-id="returns">Returns</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 95%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>str</td>
+<td>A message stating whether the outlier proportion is within the acceptable threshold. If the outlier proportion is less than or equal to <code>threshold</code>, the function returns: “The proportion of outliers is within the acceptable threshold. Check complete!” Otherwise, it returns: “The proportion of outliers exceeds the threshold {threshold}. Check complete!”</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="raises" class="level2 doc-section doc-section-raises">
+<h2 class="doc-section doc-section-raises anchored" data-anchor-id="raises">Raises</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 3%">
+<col style="width: 5%">
+<col style="width: 90%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>TypeError</td>
+<td>If <code>dataframe</code> is not a pandas DataFrame.</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>ValueError</td>
+<td>If <code>col</code> is not found in the DataFrame. If <code>lower_bound</code> is greater than or equal to <code>upper_bound</code>. If <code>threshold</code> is not between 0 and 1 (inclusive). If the column contains no non-missing values.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="notes" class="level2 doc-section doc-section-notes">
+<h2 class="doc-section doc-section-notes anchored" data-anchor-id="notes">Notes</h2>
+<ul>
+<li>Outliers are values strictly outside the interval (<code>lower_bound</code>, <code>upper_bound</code>).</li>
+<li>Missing values are ignored when calculating the outlier proportion.</li>
+<li>This function requires keyword arguments for <code>col</code>, <code>lower_bound</code>, <code>upper_bound</code>, and <code>threshold</code>.</li>
+</ul>
+</section>
+<section id="examples" class="level2 doc-section doc-section-examples">
+<h2 class="doc-section doc-section-examples anchored" data-anchor-id="examples">Examples</h2>
+<p>Example where outlier proportion is within the threshold:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> df <span class="op">=</span> pd.DataFrame({<span class="st">"age"</span>: [<span class="dv">25</span>, <span class="dv">32</span>, <span class="dv">41</span>, <span class="dv">29</span>, <span class="dv">200</span>]})</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> outliers_validate(</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>...     dataframe<span class="op">=</span>df,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>...     col<span class="op">=</span><span class="st">"age"</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>...     lower_bound<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>...     upper_bound<span class="op">=</span><span class="dv">100</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>...     threshold<span class="op">=</span><span class="fl">0.20</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>... )</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">'The proportion of outliers is within the acceptable threshold. Check complete!'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Example where outlier proportion exceeds the threshold:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> df <span class="op">=</span> pd.DataFrame({<span class="st">"score"</span>: [<span class="dv">10</span>, <span class="dv">12</span>, <span class="dv">999</span>, <span class="dv">11</span>, <span class="dv">1000</span>]})</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> outliers_validate(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>...     dataframe<span class="op">=</span>df,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>...     col<span class="op">=</span><span class="st">"score"</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>...     lower_bound<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>...     upper_bound<span class="op">=</span><span class="dv">100</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>...     threshold<span class="op">=</span><span class="fl">0.10</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>... )</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">'The proportion of outliers exceeds the threshold 0.1. Check complete!'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>

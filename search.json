@@ -1,17 +1,87 @@
 [
   {
-    "objectID": "reference/index.html",
-    "href": "reference/index.html",
-    "title": "Function reference",
+    "objectID": "reference/development.html",
+    "href": "reference/development.html",
+    "title": "DSCI 524 Group 30 Data Validation",
     "section": "",
-    "text": "Functions for validating dataset columns.\n\n\n\ncol_types_validate.col_types_validate\nValidates that a DataFrame contains the expected number of each\n\n\nmissing_values_validate.missing_values_validate\nValidate the amount of missing values in a pandas DataFrame.\n\n\noutlier_validation.outliers_validate\nValidates that a DataFrame column contains an acceptable proportion\n\n\nstr_validate.categorical_validate\nValidate categorical column properties in a pandas DataFrame."
+    "text": "Development tools, GitHub infrastructure, and organizational practices\nIn this course, and throughout development of this project, we have utilized many new tools, and learned many new practices related to github infrastructure, collaboration, and package development. Below, we discuss some of the practices and tools we learned that we will bring forward into future projects, or if we choose to scale this project up.\nSome of our favorites as a group were:\n\ndeploying documentation using quartodoc on Github Pages - ended up being a simple, constantly updating, and aesthetic way to show our function documentation. Additionally, the fact that building locally was possible was a huge help when creating the quartodoc website, as we could preview changes without needing to push.\nGitHub actions workflow for continuous integration - allowed us to continually run the test suite and style checkers on pushes and pull requests to your project’s repository’s main branch (our deployment branch, in this case). Although this presented a cost up front in terms of workload, it later helped us to keep everything running smoothly.\nIteratively programming using LLMs, as documented in issues related to Milestone 2 - when creating tests got repetitive, when it was difficult to find where there wasn’t enough branch coverage, or when code just did not want to run, working with an LLM could be very helpful. We compared experiences with Claude compared to ChatGPT, and found that prompt engineering was absolutely make or break.\n\nIf we were to scale up, we’d utilize these new tools, as well as some older classics:\n\nGithub Flow - absolutely essential for collaboration, reproducbility, and record-keeping.\nUnit tests - illuminated a lot of potential problems in our functions, and helped to refine and improve functions.\nDefensive programming - no explanation needed\nLinking issues to pull requests to milestones to releases - this ended up being super useful for record-keeping and general wayfinding around the project."
   },
   {
-    "objectID": "reference/index.html#validation-functions",
-    "href": "reference/index.html#validation-functions",
-    "title": "Function reference",
+    "objectID": "reference/outlier_validation.outliers_validate.html",
+    "href": "reference/outlier_validation.outliers_validate.html",
+    "title": "outlier_validation.outliers_validate",
     "section": "",
-    "text": "Functions for validating dataset columns.\n\n\n\ncol_types_validate.col_types_validate\nValidates that a DataFrame contains the expected number of each\n\n\nmissing_values_validate.missing_values_validate\nValidate the amount of missing values in a pandas DataFrame.\n\n\noutlier_validation.outliers_validate\nValidates that a DataFrame column contains an acceptable proportion\n\n\nstr_validate.categorical_validate\nValidate categorical column properties in a pandas DataFrame."
+    "text": "outlier_validation.outliers_validate(\n    dataframe,\n    *,\n    col,\n    lower_bound,\n    upper_bound,\n    threshold,\n)\nValidates that a DataFrame column contains an acceptable proportion of values outside a user-defined range.\nThis function checks whether the proportion of non-missing values in the specified column that fall outside the interval [lower_bound, upper_bound] is less than or equal to the given threshold.\nOutliers are defined as values strictly less than lower_bound or strictly greater than upper_bound. Values equal to the bounds are not considered outliers. Missing values (NaN) are ignored when calculating the outlier proportion.\nAll arguments except dataframe are keyword-only.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\ndataframe\npd.DataFrame\nThe DataFrame containing the data to validate.\nrequired\n\n\ncol\nstr\nName of the column in which outliers will be identified.\nrequired\n\n\nlower_bound\nfloat\nThe lower bound of the acceptable value range.\nrequired\n\n\nupper_bound\nfloat\nThe upper bound of the acceptable value range.\nrequired\n\n\nthreshold\nfloat\nThe maximum acceptable proportion of outliers (between 0 and 1).\nrequired\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nstr\nA message stating whether the outlier proportion is within the acceptable threshold. If the outlier proportion is less than or equal to threshold, the function returns: “The proportion of outliers is within the acceptable threshold. Check complete!” Otherwise, it returns: “The proportion of outliers exceeds the threshold {threshold}. Check complete!”\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nTypeError\nIf dataframe is not a pandas DataFrame.\n\n\n\nValueError\nIf col is not found in the DataFrame. If lower_bound is greater than or equal to upper_bound. If threshold is not between 0 and 1 (inclusive). If the column contains no non-missing values.\n\n\n\n\n\n\n\nOutliers are values strictly outside the interval (lower_bound, upper_bound).\nMissing values are ignored when calculating the outlier proportion.\nThis function requires keyword arguments for col, lower_bound, upper_bound, and threshold.\n\n\n\n\nExample where outlier proportion is within the threshold:\n&gt;&gt;&gt; import pandas as pd\n&gt;&gt;&gt; df = pd.DataFrame({\"age\": [25, 32, 41, 29, 200]})\n&gt;&gt;&gt; outliers_validate(\n...     dataframe=df,\n...     col=\"age\",\n...     lower_bound=0,\n...     upper_bound=100,\n...     threshold=0.20\n... )\n'The proportion of outliers is within the acceptable threshold. Check complete!'\nExample where outlier proportion exceeds the threshold:\n&gt;&gt;&gt; df = pd.DataFrame({\"score\": [10, 12, 999, 11, 1000]})\n&gt;&gt;&gt; outliers_validate(\n...     dataframe=df,\n...     col=\"score\",\n...     lower_bound=0,\n...     upper_bound=100,\n...     threshold=0.10\n... )\n'The proportion of outliers exceeds the threshold 0.1. Check complete!'"
+  },
+  {
+    "objectID": "reference/outlier_validation.outliers_validate.html#parameters",
+    "href": "reference/outlier_validation.outliers_validate.html#parameters",
+    "title": "outlier_validation.outliers_validate",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\ndataframe\npd.DataFrame\nThe DataFrame containing the data to validate.\nrequired\n\n\ncol\nstr\nName of the column in which outliers will be identified.\nrequired\n\n\nlower_bound\nfloat\nThe lower bound of the acceptable value range.\nrequired\n\n\nupper_bound\nfloat\nThe upper bound of the acceptable value range.\nrequired\n\n\nthreshold\nfloat\nThe maximum acceptable proportion of outliers (between 0 and 1).\nrequired"
+  },
+  {
+    "objectID": "reference/outlier_validation.outliers_validate.html#returns",
+    "href": "reference/outlier_validation.outliers_validate.html#returns",
+    "title": "outlier_validation.outliers_validate",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\n\nstr\nA message stating whether the outlier proportion is within the acceptable threshold. If the outlier proportion is less than or equal to threshold, the function returns: “The proportion of outliers is within the acceptable threshold. Check complete!” Otherwise, it returns: “The proportion of outliers exceeds the threshold {threshold}. Check complete!”"
+  },
+  {
+    "objectID": "reference/outlier_validation.outliers_validate.html#raises",
+    "href": "reference/outlier_validation.outliers_validate.html#raises",
+    "title": "outlier_validation.outliers_validate",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\n\nTypeError\nIf dataframe is not a pandas DataFrame.\n\n\n\nValueError\nIf col is not found in the DataFrame. If lower_bound is greater than or equal to upper_bound. If threshold is not between 0 and 1 (inclusive). If the column contains no non-missing values."
+  },
+  {
+    "objectID": "reference/outlier_validation.outliers_validate.html#notes",
+    "href": "reference/outlier_validation.outliers_validate.html#notes",
+    "title": "outlier_validation.outliers_validate",
+    "section": "",
+    "text": "Outliers are values strictly outside the interval (lower_bound, upper_bound).\nMissing values are ignored when calculating the outlier proportion.\nThis function requires keyword arguments for col, lower_bound, upper_bound, and threshold."
+  },
+  {
+    "objectID": "reference/outlier_validation.outliers_validate.html#examples",
+    "href": "reference/outlier_validation.outliers_validate.html#examples",
+    "title": "outlier_validation.outliers_validate",
+    "section": "",
+    "text": "Example where outlier proportion is within the threshold:\n&gt;&gt;&gt; import pandas as pd\n&gt;&gt;&gt; df = pd.DataFrame({\"age\": [25, 32, 41, 29, 200]})\n&gt;&gt;&gt; outliers_validate(\n...     dataframe=df,\n...     col=\"age\",\n...     lower_bound=0,\n...     upper_bound=100,\n...     threshold=0.20\n... )\n'The proportion of outliers is within the acceptable threshold. Check complete!'\nExample where outlier proportion exceeds the threshold:\n&gt;&gt;&gt; df = pd.DataFrame({\"score\": [10, 12, 999, 11, 1000]})\n&gt;&gt;&gt; outliers_validate(\n...     dataframe=df,\n...     col=\"score\",\n...     lower_bound=0,\n...     upper_bound=100,\n...     threshold=0.10\n... )\n'The proportion of outliers exceeds the threshold 0.1. Check complete!'"
+  },
+  {
+    "objectID": "reference/col_types_validate.col_types_validate.html",
+    "href": "reference/col_types_validate.col_types_validate.html",
+    "title": "col_types_validate.col_types_validate",
+    "section": "",
+    "text": "col_types_validate.col_types_validate(\n    dataframe,\n    *,\n    numeric_cols=0,\n    integer_cols=0,\n    float_cols=0,\n    boolean_cols=0,\n    categorical_cols=0,\n    text_cols=0,\n    datetime_cols=0,\n    allow_extra_cols=True,\n    column_schema=None,\n)\nValidates that a DataFrame contains the expected number of each logical column category and/or that specific columns match expected data types.\nThis function performs two types of validation on a Pandas DataFrame:\n\nCount-based validation: Ensures the DataFrame contains the expected number of columns in each logical column category (e.g., numeric, text, categorical).\nColumn-specific validation: Ensures that user-specified column names exist in the DataFrame and match their expected logical data types.\n\nAll column count arguments are keyword-only. Users may also choose to allow extra, unspecified columns. All lowercase.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\ndataframe\npd.DataFrame\nThe DataFrame to validate.\nrequired\n\n\nnumeric_cols\nint\nTotal number of numeric columns (integers and floats combined).\n0\n\n\ninteger_cols\nint\nNumber of integer-valued numeric columns.\n0\n\n\nfloat_cols\nint\nNumber of floating-point numeric columns.\n0\n\n\nboolean_cols\nint\nNumber of boolean columns.\n0\n\n\ncategorical_cols\nint\nNumber of categorical columns (pandas ‘category’ dtype).\n0\n\n\ntext_cols\nint\nNumber of text columns (‘string’ or ‘object’ dtype).\n0\n\n\ndatetime_cols\nint\nNumber of datetime-like columns (‘datetime64’ or timezone-aware).\n0\n\n\nallow_extra_cols\nbool\nWhether to allow columns that are not accounted for by the specified validation rules. If False, unexpected columns will be reported as validation failures.\nFalse\n\n\ncolumn_schema\ndict[str, str or type]\nMapping of column names to expected logical data types. Each specified column must exist in the DataFrame and match the expected type.\nNone\n\n\nSupported\n\n- “numeric” - “integer” - “float” - “boolean” - “categorical” - “text” - “datetime”\nrequired\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nstr\nA message stating whether all checks passed. If validation fails, the message describes which columns are missing, mismatched, or unexpected.\n\n\n\n\n\n\n\nKeyword arguments are required for all column type arguments.\nCount-based and column-specific validation may be used together.\nIf both validation modes are provided, both must pass for validation to check complete.\n\n\n\n\nCount-based validation only:\n&gt;&gt;&gt; import pandas as pd\n&gt;&gt;&gt; df = pd.DataFrame({\n...     \"city\": [\"Vancouver\", \"Toronto\", \"Calgary\", \"Winnipeg\"],\n...     \"name\": [\"John Smith\", \"Bron Crift\", \"Pylon Gift\", \"Akon Sarmist\"],\n...     \"gender\": [\"M\", \"F\", \"F\", \"M\"],\n...     \"age\": [25, 32, 41, 29]\n... })\n&gt;&gt;&gt; col_types_validate(\n...     dataframe=df,\n...     integer_cols=1,\n...     text_cols=3\n... )\n'All column categories present in the expected numbers.\nCheck complete!'\nColumn-specific validation using logical type strings:\n&gt;&gt;&gt; col_types_validate(\n...     dataframe=df,\n...     column_schema={\n...         \"age\": \"integer\",\n...         \"city\": \"text\",\n...         \"name\": \"text\"\n...     }\n... )\n'All specified columns match their expected types. Check complete!'\nCombined count-based and column-specific validation:\n&gt;&gt;&gt; col_types_validate(\n...     dataframe=df,\n...     integer_cols=1,\n...     text_cols=3,\n...     column_schema={\n...         \"age\": \"integer\"\n...     }\n... )\n'All column categories and specified columns are valid. Check complete!'"
+  },
+  {
+    "objectID": "reference/col_types_validate.col_types_validate.html#parameters",
+    "href": "reference/col_types_validate.col_types_validate.html#parameters",
+    "title": "col_types_validate.col_types_validate",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\ndataframe\npd.DataFrame\nThe DataFrame to validate.\nrequired\n\n\nnumeric_cols\nint\nTotal number of numeric columns (integers and floats combined).\n0\n\n\ninteger_cols\nint\nNumber of integer-valued numeric columns.\n0\n\n\nfloat_cols\nint\nNumber of floating-point numeric columns.\n0\n\n\nboolean_cols\nint\nNumber of boolean columns.\n0\n\n\ncategorical_cols\nint\nNumber of categorical columns (pandas ‘category’ dtype).\n0\n\n\ntext_cols\nint\nNumber of text columns (‘string’ or ‘object’ dtype).\n0\n\n\ndatetime_cols\nint\nNumber of datetime-like columns (‘datetime64’ or timezone-aware).\n0\n\n\nallow_extra_cols\nbool\nWhether to allow columns that are not accounted for by the specified validation rules. If False, unexpected columns will be reported as validation failures.\nFalse\n\n\ncolumn_schema\ndict[str, str or type]\nMapping of column names to expected logical data types. Each specified column must exist in the DataFrame and match the expected type.\nNone\n\n\nSupported\n\n- “numeric” - “integer” - “float” - “boolean” - “categorical” - “text” - “datetime”\nrequired"
+  },
+  {
+    "objectID": "reference/col_types_validate.col_types_validate.html#returns",
+    "href": "reference/col_types_validate.col_types_validate.html#returns",
+    "title": "col_types_validate.col_types_validate",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\n\nstr\nA message stating whether all checks passed. If validation fails, the message describes which columns are missing, mismatched, or unexpected."
+  },
+  {
+    "objectID": "reference/col_types_validate.col_types_validate.html#notes",
+    "href": "reference/col_types_validate.col_types_validate.html#notes",
+    "title": "col_types_validate.col_types_validate",
+    "section": "",
+    "text": "Keyword arguments are required for all column type arguments.\nCount-based and column-specific validation may be used together.\nIf both validation modes are provided, both must pass for validation to check complete."
+  },
+  {
+    "objectID": "reference/col_types_validate.col_types_validate.html#examples",
+    "href": "reference/col_types_validate.col_types_validate.html#examples",
+    "title": "col_types_validate.col_types_validate",
+    "section": "",
+    "text": "Count-based validation only:\n&gt;&gt;&gt; import pandas as pd\n&gt;&gt;&gt; df = pd.DataFrame({\n...     \"city\": [\"Vancouver\", \"Toronto\", \"Calgary\", \"Winnipeg\"],\n...     \"name\": [\"John Smith\", \"Bron Crift\", \"Pylon Gift\", \"Akon Sarmist\"],\n...     \"gender\": [\"M\", \"F\", \"F\", \"M\"],\n...     \"age\": [25, 32, 41, 29]\n... })\n&gt;&gt;&gt; col_types_validate(\n...     dataframe=df,\n...     integer_cols=1,\n...     text_cols=3\n... )\n'All column categories present in the expected numbers.\nCheck complete!'\nColumn-specific validation using logical type strings:\n&gt;&gt;&gt; col_types_validate(\n...     dataframe=df,\n...     column_schema={\n...         \"age\": \"integer\",\n...         \"city\": \"text\",\n...         \"name\": \"text\"\n...     }\n... )\n'All specified columns match their expected types. Check complete!'\nCombined count-based and column-specific validation:\n&gt;&gt;&gt; col_types_validate(\n...     dataframe=df,\n...     integer_cols=1,\n...     text_cols=3,\n...     column_schema={\n...         \"age\": \"integer\"\n...     }\n... )\n'All column categories and specified columns are valid. Check complete!'"
   },
   {
     "objectID": "README.html",
@@ -82,5 +152,96 @@
     "title": "Welcome to DSCI_524_Group_30_Data_Validation",
     "section": "",
     "text": "Copyright © 2026 Daniel Yorke, Cynthia Agata Limantono, Shrijaa Venkatasubramanian Subashini, and Wendy Frankel\nFree software distributed under the MIT License."
+  },
+  {
+    "objectID": "reference/index.html",
+    "href": "reference/index.html",
+    "title": "Function reference",
+    "section": "",
+    "text": "Functions for validating dataset columns.\n\n\n\ncol_types_validate.col_types_validate\nValidates that a DataFrame contains the expected number of each\n\n\nmissing_values_validate.missing_values_validate\nValidate the amount of missing values in a pandas DataFrame.\n\n\noutlier_validation.outliers_validate\nValidates that a DataFrame column contains an acceptable proportion\n\n\nstr_validate.categorical_validate\nValidate categorical column properties in a pandas DataFrame."
+  },
+  {
+    "objectID": "reference/index.html#validation-functions",
+    "href": "reference/index.html#validation-functions",
+    "title": "Function reference",
+    "section": "",
+    "text": "Functions for validating dataset columns.\n\n\n\ncol_types_validate.col_types_validate\nValidates that a DataFrame contains the expected number of each\n\n\nmissing_values_validate.missing_values_validate\nValidate the amount of missing values in a pandas DataFrame.\n\n\noutlier_validation.outliers_validate\nValidates that a DataFrame column contains an acceptable proportion\n\n\nstr_validate.categorical_validate\nValidate categorical column properties in a pandas DataFrame."
+  },
+  {
+    "objectID": "reference/missing_values_validate.missing_values_validate.html",
+    "href": "reference/missing_values_validate.missing_values_validate.html",
+    "title": "missing_values_validate.missing_values_validate",
+    "section": "",
+    "text": "missing_values_validate.missing_values_validate(df, col, threshold)\nValidate the amount of missing values in a pandas DataFrame.\nThis function checks whether the given column in the pandas DataFrame has missing values at or below the given threshold.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\ndf\npd.DataFrame\nthe pandas DataFrame containing missing values.\nrequired\n\n\ncol\nstr\nthe column name (str) containing missing values to validate.\nrequired\n\n\nthreshold\nfloat or int\nthe decimal threshold of missing values that is acceptable to check. Must be between 0 and 1 (inclusive). For instance, 0.20 for threshold means only 20% or lower of the observations are allowed to be missing.\nrequired\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nbool\nTrue if the proportion of missing values is at or below the threshold, otherwise False.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nTypeError\nIf df is None or not a pandas DataFrame or if threshold is not numeric (float or int) or if col is not a string.\n\n\n\nKeyError\nIf col does not exist in the dataframe.\n\n\n\nValueError\nIf threshold is not between 0.0 and 1.0 (inclusive)\n\n\n\n\n\n\n&gt;&gt;&gt; import pandas as pd\n&gt;&gt;&gt; data = pd.DataFrame({\n        \"name\": [\"Alex\", None, None, \"Austin\", None],\n        \"age\": [21, 43, 23, None, 38],\n        \"sex\": [\"M\", \"F\", \"F\", \"M\", \"F\"],\n        \"married\": [True, False, None, None, True]})\n&gt;&gt;&gt; missing_values_validate(df=data, col=\"age\", threshold=0.25)\nTrue\n&gt;&gt;&gt; missing_values_validate(df=data, col=\"name\", threshold=0.05)\nFalse"
+  },
+  {
+    "objectID": "reference/missing_values_validate.missing_values_validate.html#parameters",
+    "href": "reference/missing_values_validate.missing_values_validate.html#parameters",
+    "title": "missing_values_validate.missing_values_validate",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\ndf\npd.DataFrame\nthe pandas DataFrame containing missing values.\nrequired\n\n\ncol\nstr\nthe column name (str) containing missing values to validate.\nrequired\n\n\nthreshold\nfloat or int\nthe decimal threshold of missing values that is acceptable to check. Must be between 0 and 1 (inclusive). For instance, 0.20 for threshold means only 20% or lower of the observations are allowed to be missing.\nrequired"
+  },
+  {
+    "objectID": "reference/missing_values_validate.missing_values_validate.html#returns",
+    "href": "reference/missing_values_validate.missing_values_validate.html#returns",
+    "title": "missing_values_validate.missing_values_validate",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\n\nbool\nTrue if the proportion of missing values is at or below the threshold, otherwise False."
+  },
+  {
+    "objectID": "reference/missing_values_validate.missing_values_validate.html#raises",
+    "href": "reference/missing_values_validate.missing_values_validate.html#raises",
+    "title": "missing_values_validate.missing_values_validate",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\n\nTypeError\nIf df is None or not a pandas DataFrame or if threshold is not numeric (float or int) or if col is not a string.\n\n\n\nKeyError\nIf col does not exist in the dataframe.\n\n\n\nValueError\nIf threshold is not between 0.0 and 1.0 (inclusive)"
+  },
+  {
+    "objectID": "reference/missing_values_validate.missing_values_validate.html#examples",
+    "href": "reference/missing_values_validate.missing_values_validate.html#examples",
+    "title": "missing_values_validate.missing_values_validate",
+    "section": "",
+    "text": "&gt;&gt;&gt; import pandas as pd\n&gt;&gt;&gt; data = pd.DataFrame({\n        \"name\": [\"Alex\", None, None, \"Austin\", None],\n        \"age\": [21, 43, 23, None, 38],\n        \"sex\": [\"M\", \"F\", \"F\", \"M\", \"F\"],\n        \"married\": [True, False, None, None, True]})\n&gt;&gt;&gt; missing_values_validate(df=data, col=\"age\", threshold=0.25)\nTrue\n&gt;&gt;&gt; missing_values_validate(df=data, col=\"name\", threshold=0.05)\nFalse"
+  },
+  {
+    "objectID": "reference/str_validate.categorical_validate.html",
+    "href": "reference/str_validate.categorical_validate.html",
+    "title": "str_validate.categorical_validate",
+    "section": "",
+    "text": "str_validate.categorical_validate(\n    dataframe,\n    column,\n    num_cat,\n    case=None,\n    spaces=False,\n)\nValidate categorical column properties in a pandas DataFrame.\nThis function performs a series of validation checks on a specified categorical column. Checks include validating the number of unique categories and enforcing consistent casing and formatting rules such as title case, uppercase, lowercase, and presence of spaces.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\ndataframe\npd.DataFrame\nThe pandas DataFrame containing the categorical column.\nrequired\n\n\ncolumn\nstr\nName of the column to validate.\nrequired\n\n\nnum_cat\nint\nExpected number of unique categories in the column, excluding missing values (NaN, None, etc.).\nrequired\n\n\ncase\nstr\nExpected case format for all categories. Valid options are: - “upper” : All categories should be uppercase - “lower” : All categories should be lowercase - “title” : All categories should be in title case (first letter of each word capitalized, as determined by str.istitle()) If None (default), no case validation is performed.\nNone\n\n\nspaces\nbool\nIf True, checks whether all categories contain at least one space.\nFalse\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nstr\nA confirmation message ‘Checks completed!’ indicating that all validation checks have been executed. This message is returned regardless of whether validations passed or failed. Individual check results are printed to stdout during execution.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nKeyError\nIf the specified column does not exist in the dataframe.\n\n\n\nValueError\nIf num_cat is negative or if case is not one of the valid options (“upper”, “lower”, “title”, None).\n\n\n\nTypeError\nIf the column does not contain string/categorical data.\n\n\n\n\n\n\n\nMissing values are removed prior to all validation checks.\nCase validation is only performed if the case parameter is specified.\nValidation results are reported via printed messages rather than raised exceptions.\n\n\n\n\n&gt;&gt;&gt; import pandas as pd\n&gt;&gt;&gt; df = pd.DataFrame({\n...     \"city\": [\"Vancouver\", \"Toronto\", \"Calgary\", None],\n...     \"gender\": [\"M\", \"F\", \"F\", \"M\"],\n...     \"age\": [25, 32, 41, 29]\n... })\n&gt;&gt;&gt; categorical_validate(\n...     dataframe=df,\n...     column=\"city\",\n...     num_cat=3,\n...     case=\"title\",\n...     spaces=False\n... )\nExpected and actual number of categories are equal\nAll categories are in title case\n'Checks completed!'"
+  },
+  {
+    "objectID": "reference/str_validate.categorical_validate.html#parameters",
+    "href": "reference/str_validate.categorical_validate.html#parameters",
+    "title": "str_validate.categorical_validate",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\ndataframe\npd.DataFrame\nThe pandas DataFrame containing the categorical column.\nrequired\n\n\ncolumn\nstr\nName of the column to validate.\nrequired\n\n\nnum_cat\nint\nExpected number of unique categories in the column, excluding missing values (NaN, None, etc.).\nrequired\n\n\ncase\nstr\nExpected case format for all categories. Valid options are: - “upper” : All categories should be uppercase - “lower” : All categories should be lowercase - “title” : All categories should be in title case (first letter of each word capitalized, as determined by str.istitle()) If None (default), no case validation is performed.\nNone\n\n\nspaces\nbool\nIf True, checks whether all categories contain at least one space.\nFalse"
+  },
+  {
+    "objectID": "reference/str_validate.categorical_validate.html#returns",
+    "href": "reference/str_validate.categorical_validate.html#returns",
+    "title": "str_validate.categorical_validate",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\n\nstr\nA confirmation message ‘Checks completed!’ indicating that all validation checks have been executed. This message is returned regardless of whether validations passed or failed. Individual check results are printed to stdout during execution."
+  },
+  {
+    "objectID": "reference/str_validate.categorical_validate.html#raises",
+    "href": "reference/str_validate.categorical_validate.html#raises",
+    "title": "str_validate.categorical_validate",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\n\nKeyError\nIf the specified column does not exist in the dataframe.\n\n\n\nValueError\nIf num_cat is negative or if case is not one of the valid options (“upper”, “lower”, “title”, None).\n\n\n\nTypeError\nIf the column does not contain string/categorical data."
+  },
+  {
+    "objectID": "reference/str_validate.categorical_validate.html#notes",
+    "href": "reference/str_validate.categorical_validate.html#notes",
+    "title": "str_validate.categorical_validate",
+    "section": "",
+    "text": "Missing values are removed prior to all validation checks.\nCase validation is only performed if the case parameter is specified.\nValidation results are reported via printed messages rather than raised exceptions."
+  },
+  {
+    "objectID": "reference/str_validate.categorical_validate.html#examples",
+    "href": "reference/str_validate.categorical_validate.html#examples",
+    "title": "str_validate.categorical_validate",
+    "section": "",
+    "text": "&gt;&gt;&gt; import pandas as pd\n&gt;&gt;&gt; df = pd.DataFrame({\n...     \"city\": [\"Vancouver\", \"Toronto\", \"Calgary\", None],\n...     \"gender\": [\"M\", \"F\", \"F\", \"M\"],\n...     \"age\": [25, 32, 41, 29]\n... })\n&gt;&gt;&gt; categorical_validate(\n...     dataframe=df,\n...     column=\"city\",\n...     num_cat=3,\n...     case=\"title\",\n...     spaces=False\n... )\nExpected and actual number of categories are equal\nAll categories are in title case\n'Checks completed!'"
   }
 ]

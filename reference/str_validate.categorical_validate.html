@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>index – DSCI 524 Group 30 Data Validation</title>
+<title>str_validate.categorical_validate – DSCI 524 Group 30 Data Validation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -94,7 +129,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../reference/index.html" aria-current="page"> 
+    <a class="nav-link" href="../reference/index.html"> 
 <span class="menu-text">Reference</span></a>
   </li>  
   <li class="nav-item">
@@ -117,9 +152,13 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#function-reference" id="toc-function-reference" class="nav-link active" data-scroll-target="#function-reference">Function reference</a>
+  <li><a href="#dsci_524_group_30_data_validation.str_validate.categorical_validate" id="toc-dsci_524_group_30_data_validation.str_validate.categorical_validate" class="nav-link active" data-scroll-target="#dsci_524_group_30_data_validation.str_validate.categorical_validate">str_validate.categorical_validate</a>
   <ul class="collapse">
-  <li><a href="#validation-functions" id="toc-validation-functions" class="nav-link" data-scroll-target="#validation-functions">Validation Functions</a></li>
+  <li><a href="#parameters" id="toc-parameters" class="nav-link" data-scroll-target="#parameters">Parameters</a></li>
+  <li><a href="#returns" id="toc-returns" class="nav-link" data-scroll-target="#returns">Returns</a></li>
+  <li><a href="#raises" id="toc-raises" class="nav-link" data-scroll-target="#raises">Raises</a></li>
+  <li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes">Notes</a></li>
+  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Examples</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -130,31 +169,152 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="function-reference" class="level1 doc doc-index">
-<h1 class="doc doc-index">Function reference</h1>
-<section id="validation-functions" class="level2">
-<h2 class="anchored" data-anchor-id="validation-functions">Validation Functions</h2>
-<p>Functions for validating dataset columns.</p>
+<section id="dsci_524_group_30_data_validation.str_validate.categorical_validate" class="level1">
+<h1>str_validate.categorical_validate</h1>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>str_validate.categorical_validate(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    dataframe,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    column,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    num_cat,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    case<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    spaces<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Validate categorical column properties in a pandas DataFrame.</p>
+<p>This function performs a series of validation checks on a specified categorical column. Checks include validating the number of unique categories and enforcing consistent casing and formatting rules such as title case, uppercase, lowercase, and presence of spaces.</p>
+<section id="parameters" class="level2 doc-section doc-section-parameters">
+<h2 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters">Parameters</h2>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 2%">
+<col style="width: 3%">
+<col style="width: 89%">
+<col style="width: 3%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
-<td><a href="../reference/col_types_validate.col_types_validate.html#dsci_524_group_30_data_validation.col_types_validate.col_types_validate">col_types_validate.col_types_validate</a></td>
-<td>Validates that a DataFrame contains the expected number of each</td>
+<td>dataframe</td>
+<td>pd.DataFrame</td>
+<td>The pandas DataFrame containing the categorical column.</td>
+<td><em>required</em></td>
 </tr>
 <tr class="even">
-<td><a href="../reference/missing_values_validate.missing_values_validate.html#dsci_524_group_30_data_validation.missing_values_validate.missing_values_validate">missing_values_validate.missing_values_validate</a></td>
-<td>Validate the amount of missing values in a pandas DataFrame.</td>
+<td>column</td>
+<td>str</td>
+<td>Name of the column to validate.</td>
+<td><em>required</em></td>
 </tr>
 <tr class="odd">
-<td><a href="../reference/outlier_validation.outliers_validate.html#dsci_524_group_30_data_validation.outlier_validation.outliers_validate">outlier_validation.outliers_validate</a></td>
-<td>Validates that a DataFrame column contains an acceptable proportion</td>
+<td>num_cat</td>
+<td>int</td>
+<td>Expected number of unique categories in the column, excluding missing values (NaN, None, etc.).</td>
+<td><em>required</em></td>
 </tr>
 <tr class="even">
-<td><a href="../reference/str_validate.categorical_validate.html#dsci_524_group_30_data_validation.str_validate.categorical_validate">str_validate.categorical_validate</a></td>
-<td>Validate categorical column properties in a pandas DataFrame.</td>
+<td>case</td>
+<td>str</td>
+<td>Expected case format for all categories. Valid options are: - “upper” : All categories should be uppercase - “lower” : All categories should be lowercase - “title” : All categories should be in title case (first letter of each word capitalized, as determined by str.istitle()) If None (default), no case validation is performed.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="odd">
+<td>spaces</td>
+<td>bool</td>
+<td>If True, checks whether all categories contain at least one space.</td>
+<td><code>False</code></td>
 </tr>
 </tbody>
 </table>
+</section>
+<section id="returns" class="level2 doc-section doc-section-returns">
+<h2 class="doc-section doc-section-returns anchored" data-anchor-id="returns">Returns</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 93%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>str</td>
+<td>A confirmation message ‘Checks completed!’ indicating that all validation checks have been executed. This message is returned regardless of whether validations passed or failed. Individual check results are printed to stdout during execution.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="raises" class="level2 doc-section doc-section-raises">
+<h2 class="doc-section doc-section-raises anchored" data-anchor-id="raises">Raises</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 9%">
+<col style="width: 83%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>KeyError</td>
+<td>If the specified column does not exist in the dataframe.</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>ValueError</td>
+<td>If num_cat is negative or if case is not one of the valid options (“upper”, “lower”, “title”, None).</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>TypeError</td>
+<td>If the column does not contain string/categorical data.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="notes" class="level2 doc-section doc-section-notes">
+<h2 class="doc-section doc-section-notes anchored" data-anchor-id="notes">Notes</h2>
+<ul>
+<li>Missing values are removed prior to all validation checks.</li>
+<li>Case validation is only performed if the case parameter is specified.</li>
+<li>Validation results are reported via printed messages rather than raised exceptions.</li>
+</ul>
+</section>
+<section id="examples" class="level2 doc-section doc-section-examples">
+<h2 class="doc-section doc-section-examples anchored" data-anchor-id="examples">Examples</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>...     <span class="st">"city"</span>: [<span class="st">"Vancouver"</span>, <span class="st">"Toronto"</span>, <span class="st">"Calgary"</span>, <span class="va">None</span>],</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>...     <span class="st">"gender"</span>: [<span class="st">"M"</span>, <span class="st">"F"</span>, <span class="st">"F"</span>, <span class="st">"M"</span>],</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>...     <span class="st">"age"</span>: [<span class="dv">25</span>, <span class="dv">32</span>, <span class="dv">41</span>, <span class="dv">29</span>]</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>... })</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> categorical_validate(</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>...     dataframe<span class="op">=</span>df,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>...     column<span class="op">=</span><span class="st">"city"</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>...     num_cat<span class="op">=</span><span class="dv">3</span>,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>...     case<span class="op">=</span><span class="st">"title"</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>...     spaces<span class="op">=</span><span class="va">False</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>... )</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>Expected <span class="kw">and</span> actual number of categories are equal</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>All categories are <span class="kw">in</span> title case</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co">'Checks completed!'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>
