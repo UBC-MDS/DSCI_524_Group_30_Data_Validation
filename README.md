@@ -5,6 +5,24 @@
 | Package | [![Latest TestPyPI Version](https://img.shields.io/badge/dynamic/json?color=blue&label=testpypi&query=%24.info.version&url=https%3A%2F%2Ftest.pypi.org%2Fpypi%2FDSCI_524_Group_30_Data_Validation%2Fjson)](https://test.pypi.org/project/DSCI_524_Group_30_Data_Validation/) [![Supported Python Versions](https://img.shields.io/badge/python-3.10+-blue.svg)](https://test.pypi.org/project/DSCI_524_Group_30_Data_Validation/)  |
 | Meta   | [![Code of Conduct](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md) |
 
+## Continuous Integration / GitHub Badges
+
+[![codecov](https://codecov.io/gh/UBC-MDS/DSCI_524_Group_30_Data_Validation/branch/main/graph/badge.svg?token=sT0UlVC1nn)](https://codecov.io/gh/UBC-MDS/DSCI_524_Group_30_Data_Validation)
+
+### Workflows
+
+[![Build Docs](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/docs.yml/badge.svg)](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/docs.yml)
+
+[![CI](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/build.yml/badge.svg)](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/build.yml)
+
+[![Dependabot Updates](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/dependabot/dependabot-updates)
+
+[![Publish to Test PyPI](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/publish-test-pypi.yml/badge.svg)](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/publish-test-pypi.yml)
+
+[![Build Pages Deployment](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/pages/pages-build-deployment)
+
+[![Publish Docs](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/publish-docs.yml/badge.svg)](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/publish-docs.yml)
+
 ## Summary
 
 This package is an open source project which performs common data validation checks on a Pandas dataframe. This package aims to provide clear,
@@ -235,24 +253,6 @@ Expected and actual number of categories are equal
 All categories are in title case
 'Checks completed!'
 ```
-
-## Continuous Integration / GitHub Badges
-
-[![codecov](https://codecov.io/gh/UBC-MDS/DSCI_524_Group_30_Data_Validation/branch/main/graph/badge.svg?token=sT0UlVC1nn)](https://codecov.io/gh/UBC-MDS/DSCI_524_Group_30_Data_Validation)
-
-### Workflows
-
-[![Build Docs](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/docs.yml/badge.svg)](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/docs.yml)
-
-[![CI](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/build.yml/badge.svg)](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/build.yml)
-
-[![Dependabot Updates](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/dependabot/dependabot-updates)
-
-[![Publish to Test PyPI](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/publish-test-pypi.yml/badge.svg)](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/publish-test-pypi.yml)
-
-[![Build Pages Deployment](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/pages/pages-build-deployment)
-
-[![Publish Docs](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/publish-docs.yml/badge.svg)](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/publish-docs.yml)
 
 ## Contributors
 
