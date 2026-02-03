@@ -248,7 +248,7 @@ All categories are in title case
 
 [![Dependabot Updates](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/dependabot/dependabot-updates)
 
-[![Publish to Test PyPI](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/deploy.yml/badge.svg)](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/publish-test-pypi.yml)
+[![Publish to Test PyPI](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/publish-test-pypi.yml/badge.svg)](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/publish-test-pypi.yml)
 
 [![Build Pages Deployment](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/UBC-MDS/DSCI_524_Group_30_Data_Validation/actions/workflows/pages/pages-build-deployment)
 
